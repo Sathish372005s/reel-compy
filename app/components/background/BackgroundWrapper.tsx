@@ -10,17 +10,19 @@ export default function BackgroundWrapper() {
       <GridLines />
 
       {/* Rotating Stars */}
-      <RotatingStar
-        top="22%"
-        left="10%"
-        size={120}
-      />
+      <div className="hidden sm:block">
+        <RotatingStar
+          top="22%"
+          left="10%"
+          size={120}
+        />
 
-      <RotatingStar
-        bottom="18%"
-        right="10%"
-        size={90}
-      />
+        <RotatingStar
+          bottom="18%"
+          right="10%"
+          size={90}
+        />
+      </div>
 
       {/* Noise */}
       <NoiseTexture />

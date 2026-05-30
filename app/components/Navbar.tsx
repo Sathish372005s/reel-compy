@@ -34,9 +34,9 @@ function NavLink({
       onMouseLeave={() => setHovered(false)}
       className={`relative ${
         mobile
-          ? "w-full py-4 text-center border-b border-white/10"
+          ? "w-full rounded-xl border border-white/5 bg-white/[0.03] px-4 py-3 text-left"
           : "px-3 py-1.5 sm:px-4 sm:py-2"
-      } text-xs font-black uppercase tracking-wider ${active ? "text-white" : "text-zinc-400"} hover:text-white transition-colors duration-300 flex flex-col items-center gap-0.5 rounded-xl select-none`}
+      } text-xs font-black uppercase tracking-wider ${active ? "text-white" : "text-zinc-400"} hover:text-white transition-colors duration-300 flex flex-col ${mobile ? "items-start" : "items-center"} gap-0.5 rounded-xl select-none`}
     >
       {/* Corners */}
       {!mobile && (
@@ -91,19 +91,19 @@ export default function Navbar() {
 
   return (
     <div className="fixed top-0 inset-x-0 z-50 flex flex-col">
-      <div className="w-[94%] sm:w-[92%] mx-auto mt-2 sm:mt-4 flex items-center justify-between">
+      <div className="w-[94%] sm:w-[92%] mx-auto mt-2 sm:mt-4 flex items-center justify-between gap-2">
 
         {/* LEFT */}
-        <div className="flex items-center gap-6 rounded-2xl border border-white/10 bg-[#0c0c0e]/70 backdrop-blur-xl px-4 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+        <div className="flex min-w-0 flex-1 items-center gap-4 rounded-2xl border border-white/10 bg-[#0c0c0e]/80 px-3 py-2.5 shadow-[0_4px_22px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:flex-none sm:gap-6 sm:px-4 sm:py-3">
 
           {/* Logo */}
           <Link
             href="/"
-            className="group flex items-center gap-2 text-white"
+            className="group flex min-w-0 items-center gap-2 text-white"
           >
-            <Aperture className="h-5 w-5 text-red-500 transition-transform duration-500 group-hover:rotate-180" />
+            <Aperture className="h-5 w-5 shrink-0 text-red-500 transition-transform duration-500 group-hover:rotate-180" />
 
-            <h1 className="text-sm md:text-base font-black tracking-[0.2em] uppercase">
+            <h1 className="truncate text-xs font-black uppercase tracking-[0.16em] sm:text-sm md:text-base md:tracking-[0.2em]">
               sindhu<span className="text-red-500"></span>...
             </h1>
           </Link>
@@ -145,8 +145,9 @@ export default function Navbar() {
           {/* MOBILE MENU BUTTON */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden flex items-center justify-center w-12 h-12 rounded-2xl border border-white/10 bg-[#0c0c0e]/70 backdrop-blur-xl text-white"
+            className="lg:hidden flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-[#0c0c0e]/85 text-white backdrop-blur-xl sm:h-12 sm:w-12"
             aria-label="Toggle navigation menu"
+            aria-expanded={menuOpen}
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -161,9 +162,9 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
-            className="lg:hidden mt-3 mx-auto w-[94%] rounded-3xl border border-white/10 bg-[#0c0c0e]/95 backdrop-blur-2xl overflow-hidden shadow-2xl"
+            className="lg:hidden mt-2 mx-auto w-[94%] rounded-2xl border border-white/10 bg-[#0c0c0e]/96 backdrop-blur-2xl overflow-hidden shadow-2xl"
           >
-            <div className="flex flex-col p-4">
+            <div className="grid grid-cols-2 gap-2 p-3">
               {navItems.map((item) => (
                 <NavLink
                   key={item.href}
@@ -176,11 +177,11 @@ export default function Navbar() {
                 />
               ))}
 
-              <div className="flex flex-col gap-3 mt-6">
+              <div className="col-span-2 grid grid-cols-2 gap-2 pt-2">
                 <Link
                   href="/contact"
                   onClick={() => setMenuOpen(false)}
-                  className="w-full text-center rounded-full px-5 py-3 text-xs font-black uppercase tracking-wider text-white bg-gradient-to-r from-red-600 to-red-500"
+                  className="w-full rounded-xl bg-gradient-to-r from-red-600 to-red-500 px-4 py-3 text-center text-[10px] font-black uppercase tracking-wider text-white"
                 >
                   Book Now
                 </Link>
@@ -188,7 +189,7 @@ export default function Navbar() {
                 <Link
                   href="/services"
                   onClick={() => setMenuOpen(false)}
-                  className="w-full text-center rounded-full border border-white/10 bg-white/5 px-5 py-3 text-xs font-black uppercase tracking-wider text-white"
+                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-center text-[10px] font-black uppercase tracking-wider text-white"
                 >
                   Our Services
                 </Link>

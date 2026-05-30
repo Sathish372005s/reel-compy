@@ -1,19 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import BackgroundWrapper from "./components/background/BackgroundWrapper";
 import RouteTransition from "./components/RouteTransition";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,12 +17,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className="h-full antialiased"
     >
       <body className="relative min-h-full flex flex-col bg-[#050505] text-white">
         <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-[#050505]">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(120,0,0,0.55),transparent_55%)]" />
-          <div className="absolute top-0 left-1/2 h-[500px] w-[1000px] -translate-x-1/2 bg-red-700/20 blur-[160px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(120,0,0,0.38),transparent_55%)] sm:bg-[radial-gradient(ellipse_at_top,rgba(120,0,0,0.55),transparent_55%)]" />
+          <div className="absolute top-0 left-1/2 hidden h-[500px] w-[1000px] -translate-x-1/2 bg-red-700/20 blur-[160px] sm:block" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
           <BackgroundWrapper />
         </div>

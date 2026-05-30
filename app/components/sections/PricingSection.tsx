@@ -54,12 +54,12 @@ const plans = [
 
 export default function PricingSection() {
   return (
-    <section className="relative w-full max-w-7xl mx-auto px-6 py-24 pb-36 z-10 selection:bg-red-500/30">
+    <section className="relative w-full max-w-7xl mx-auto px-4 py-14 pb-20 sm:px-6 sm:py-20 sm:pb-28 lg:py-24 lg:pb-32 z-10 selection:bg-red-500/30">
       
       {/* Glow Effect */}
-      <div className="absolute bottom-12 right-1/4 w-[500px] h-[250px] bg-red-600/5 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-12 right-1/4 hidden h-[250px] w-[500px] rounded-full bg-red-600/5 blur-[100px] pointer-events-none sm:block" />
 
-      <div className="text-center mb-20">
+      <div className="text-center mb-10 sm:mb-16 lg:mb-20">
         <motion.span 
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -73,7 +73,7 @@ export default function PricingSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="text-3xl sm:text-5xl font-black uppercase text-white mt-6 tracking-tight"
+          className="text-3xl sm:text-5xl font-black uppercase text-white mt-5 sm:mt-6 tracking-tight"
         >
           CHOOSE YOUR <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">VIRAL GEAR</span>
         </motion.h2>
@@ -88,7 +88,7 @@ export default function PricingSection() {
         </motion.p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-8 relative items-stretch">
         {plans.map((plan, idx) => (
           <motion.div
             key={plan.name}
@@ -97,9 +97,9 @@ export default function PricingSection() {
             viewport={{ once: true }}
             transition={{ delay: idx * 0.15, type: "spring", stiffness: 70 }}
             whileHover={{ y: -10 }}
-            className={`group relative flex flex-col justify-between border rounded-[32px] p-8 md:p-10 transition-all duration-300 shadow-2xl ${
+            className={`group relative flex flex-col justify-between border rounded-2xl sm:rounded-[32px] p-5 sm:p-8 md:p-10 transition-all duration-300 shadow-2xl ${
               plan.isPopular
-                ? "border-red-500 bg-gradient-to-b from-zinc-900/60 to-zinc-950/90 ring-1 ring-red-500/30 scale-[1.03] lg:scale-[1.04] z-20"
+                ? "border-red-500 bg-gradient-to-b from-zinc-900/60 to-zinc-950/90 ring-1 ring-red-500/30 sm:scale-[1.02] lg:scale-[1.04] z-20"
                 : "border-white/5 bg-zinc-950/30 backdrop-blur-xl z-10"
             }`}
           >
@@ -110,17 +110,17 @@ export default function PricingSection() {
 
             <div>
               {/* Header section */}
-              <div className="flex justify-between items-start mb-6">
+              <div className="flex justify-between items-start gap-3 mb-5 sm:mb-6">
                 <div>
                   <span className="text-[10px] bg-white/5 border border-white/10 text-zinc-300 font-bold px-2.5 py-0.8 rounded-full uppercase tracking-wider">
                     {plan.badge}
                   </span>
-                  <h3 className="text-xl font-extrabold uppercase text-white mt-3 tracking-wide">
+                  <h3 className="text-lg sm:text-xl font-extrabold uppercase text-white mt-3 tracking-wide">
                     {plan.name}
                   </h3>
                 </div>
                 {plan.isPopular && (
-                  <span className="text-[9px] bg-red-600 border border-red-500 text-white font-extrabold px-3 py-1 rounded-full uppercase tracking-widest animate-pulse">
+                  <span className="shrink-0 text-[8px] sm:text-[9px] bg-red-600 border border-red-500 text-white font-extrabold px-2 sm:px-3 py-1 rounded-full uppercase tracking-widest animate-pulse">
                     🔥 POPULAR
                   </span>
                 )}
@@ -128,7 +128,7 @@ export default function PricingSection() {
 
               {/* Price section */}
               <div className="flex items-baseline gap-1.5 mb-6">
-                <span className="text-4xl md:text-5xl font-black text-white tracking-tight">{plan.price}</span>
+                <span className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">{plan.price}</span>
                 <span className="text-zinc-500 text-xs sm:text-sm font-semibold">/ {plan.period}</span>
               </div>
 
@@ -150,7 +150,7 @@ export default function PricingSection() {
             {/* CTA Button */}
             <motion.button
               whileTap={{ scale: 0.98 }}
-              className={`w-full py-4 rounded-2xl text-xs font-black uppercase tracking-widest shadow-lg transition-all duration-300 cursor-pointer ${
+              className={`w-full py-3.5 sm:py-4 rounded-xl sm:rounded-2xl text-xs font-black uppercase tracking-widest shadow-lg transition-all duration-300 cursor-pointer ${
                 plan.isPopular
                   ? "bg-gradient-to-r from-red-600 to-red-500 text-white shadow-red-500/20 hover:from-red-500 hover:to-red-400"
                   : "bg-white/5 hover:bg-white/10 text-white border border-white/10"

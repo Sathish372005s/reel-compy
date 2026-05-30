@@ -21,7 +21,7 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
         rotateY: rotateY,
         transformStyle: "preserve-3d",
       }}
-      className={`relative w-[265px] h-[530px] md:w-[325px] md:h-[660px] flex justify-center ${className || ""}`}
+      className={`relative w-[235px] h-[470px] sm:w-[265px] sm:h-[530px] md:w-[325px] md:h-[660px] flex justify-center ${className || ""}`}
     >
       {/* FRONT SIDE */}
       <div 
@@ -33,7 +33,7 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
         }}
       >
         {/* Dynamic Red Ambient Glow behind the phone */}
-        <div className="absolute top-12 h-[420px] w-[220px] rounded-full bg-red-600/10 blur-[60px] md:h-[540px] md:w-[280px]" />
+        <div className="absolute top-12 h-[360px] w-[190px] rounded-full bg-red-600/10 blur-[48px] sm:h-[420px] sm:w-[220px] md:h-[540px] md:w-[280px] md:blur-[60px]" />
 
         {/* Real iPhone Outer Frame */}
         <div className="relative h-[91%] w-full rounded-[46px] border-4 border-zinc-800 bg-zinc-950 p-[6px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_40px_rgba(220,38,38,0.2)] ring-2 ring-white/10">

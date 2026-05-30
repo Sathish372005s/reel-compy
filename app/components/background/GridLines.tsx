@@ -1,6 +1,6 @@
 export default function GridLines() {
   return (
-    <div className="absolute inset-0 flex justify-between px-16 md:px-32 opacity-25">
+    <div className="absolute inset-0 hidden justify-between px-16 opacity-20 sm:flex md:px-32 md:opacity-25">
 
       {[...Array(4)].map((_, i) => (
         <div

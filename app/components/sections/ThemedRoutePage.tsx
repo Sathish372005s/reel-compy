@@ -21,10 +21,10 @@ export default function ThemedRoutePage({
   cta = "Book Now",
 }: ThemedRoutePageProps) {
   return (
-    <main className="relative min-h-screen px-6 pb-24 pt-36 text-white selection:bg-red-500/30">
-      <div className="absolute left-1/2 top-36 h-72 w-[640px] -translate-x-1/2 rounded-full bg-red-700/10 blur-[120px] pointer-events-none" />
+    <main className="relative min-h-screen px-4 pb-16 pt-28 text-white selection:bg-red-500/30 sm:px-6 sm:pb-24 sm:pt-36">
+      <div className="absolute left-1/2 top-28 hidden h-72 w-[640px] -translate-x-1/2 rounded-full bg-red-700/10 blur-[120px] pointer-events-none sm:block sm:top-36" />
 
-      <section className="relative z-10 mx-auto flex max-w-6xl flex-col gap-12">
+      <section className="relative z-10 mx-auto flex max-w-6xl flex-col gap-8 sm:gap-12">
         <div className="max-w-3xl">
           <motion.span
             initial={{ opacity: 0, y: 12 }}
@@ -38,7 +38,7 @@ export default function ThemedRoutePage({
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.08 }}
-            className="mt-6 text-4xl font-black uppercase tracking-tight text-white sm:text-6xl"
+            className="mt-5 text-4xl font-black uppercase tracking-tight text-white sm:mt-6 sm:text-6xl"
           >
             {title}{" "}
             <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
@@ -56,14 +56,14 @@ export default function ThemedRoutePage({
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3">
           {items.map((item, index) => (
             <motion.div
               key={item}
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.12 + index * 0.08 }}
-              className="group relative overflow-hidden rounded-3xl border border-white/5 bg-zinc-950/40 p-6 shadow-xl backdrop-blur-xl"
+              className="group relative overflow-hidden rounded-2xl border border-white/5 bg-zinc-950/40 p-5 shadow-xl backdrop-blur-xl sm:rounded-3xl sm:p-6"
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(239,68,68,0.09),transparent_45%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="relative text-3xl font-black text-red-500/60">

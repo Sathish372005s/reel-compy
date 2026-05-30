@@ -16,7 +16,7 @@ export default function RouteTransition() {
     setActive(true);
     hideTimerRef.current = window.setTimeout(() => {
       setActive(false);
-    }, 920);
+    }, 420);
   };
 
   useEffect(() => {
@@ -64,9 +64,9 @@ export default function RouteTransition() {
               initial={{ scaleY: 0 }}
               animate={{ scaleY: [0, 1, 1, 0] }}
               transition={{
-                duration: 0.92,
+                duration: 0.42,
                 times: [0, 0.28, 0.68, 1],
-                delay: panel * 0.035,
+                delay: panel * 0.018,
                 ease: [0.65, 0, 0.35, 1],
               }}
               className="absolute top-0 h-full origin-top bg-gradient-to-b from-red-950 via-black to-black"
@@ -80,14 +80,14 @@ export default function RouteTransition() {
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: [0, 1, 0] }}
-            transition={{ duration: 0.72, ease: "easeOut" }}
+            transition={{ duration: 0.36, ease: "easeOut" }}
             className="absolute left-0 top-1/2 h-px w-full origin-left bg-gradient-to-r from-transparent via-red-500 to-transparent shadow-[0_0_32px_rgba(239,68,68,1)]"
           />
 
           <motion.div
             initial={{ scale: 0.65, opacity: 0, rotate: -90 }}
             animate={{ scale: [0.65, 1.15, 0.95], opacity: [0, 1, 0], rotate: 180 }}
-            transition={{ duration: 0.86, ease: "easeOut" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-3 text-white"
           >
             <Aperture className="h-14 w-14 text-red-500 drop-shadow-[0_0_28px_rgba(239,68,68,1)]" />
