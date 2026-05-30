@@ -69,7 +69,7 @@ export default function RouteTransition() {
                 delay: panel * 0.018,
                 ease: [0.65, 0, 0.35, 1],
               }}
-              className="absolute top-0 h-full origin-top bg-gradient-to-b from-red-950 via-black to-black"
+              className="absolute top-0 h-full origin-top bg-gradient-to-b from-yellow-950 via-black to-black"
               style={{
                 left: `${panel * 25}%`,
                 width: "25.2%",
@@ -81,7 +81,7 @@ export default function RouteTransition() {
             initial={{ scaleX: 0 }}
             animate={{ scaleX: [0, 1, 0] }}
             transition={{ duration: 0.36, ease: "easeOut" }}
-            className="absolute left-0 top-1/2 h-px w-full origin-left bg-gradient-to-r from-transparent via-red-500 to-transparent shadow-[0_0_32px_rgba(239,68,68,1)]"
+            className="absolute left-0 top-1/2 h-px w-full origin-left bg-gradient-to-r from-transparent via-amber-300 to-transparent shadow-[0_0_32px_rgba(251,191,36,1)]"
           />
 
           <motion.div
@@ -90,7 +90,7 @@ export default function RouteTransition() {
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-3 text-white"
           >
-            <Aperture className="h-14 w-14 text-red-500 drop-shadow-[0_0_28px_rgba(239,68,68,1)]" />
+            <Aperture className="h-14 w-14 text-amber-300 drop-shadow-[0_0_28px_rgba(251,191,36,1)]" />
             
           </motion.div>
         </motion.div>

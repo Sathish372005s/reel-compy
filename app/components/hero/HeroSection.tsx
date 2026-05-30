@@ -12,6 +12,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const phoneRef = useRef<HTMLDivElement>(null);
   const [phoneStartY, setPhoneStartY] = useState("72vh");
   
   // Track scroll position of the parent container
@@ -38,6 +39,25 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
   const phoneScale = useTransform(smoothProgress, [0, 0.75], [0.85, 1.05]);
   const phoneRotateX = useTransform(smoothProgress, [0, 0.75], [20, 0]);
 
+  const syncNavbarVisibility = () => {
+    const phoneBounds = phoneRef.current?.getBoundingClientRect();
+    const navbar = document.querySelector<HTMLElement>("[data-site-navbar]");
+
+    if (phoneBounds && navbar) {
+      const navBounds = navbar.getBoundingClientRect();
+      const phoneIsCrossingHeader =
+        phoneBounds.top <= navBounds.bottom &&
+        phoneBounds.top >= navBounds.top + 12 &&
+        phoneBounds.bottom >= navBounds.top;
+
+      window.dispatchEvent(
+        new CustomEvent("hero-phone-over-header", {
+          detail: { overHeader: phoneIsCrossingHeader },
+        })
+      );
+    }
+  };
+
   // Listen for scroll changes to open Instagram when fully centered
   useMotionValueEvent(smoothProgress, "change", (latest) => {
     if (latest >= 0.75) {
@@ -49,6 +69,8 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
         setScreen("home");
       }
     }
+
+    syncNavbarVisibility();
   });
 
   useEffect(() => {
@@ -59,8 +81,24 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
 
     syncPhoneStart();
     mediaQuery.addEventListener("change", syncPhoneStart);
+    window.addEventListener("resize", syncNavbarVisibility);
+    window.addEventListener("scroll", syncNavbarVisibility, { passive: true });
 
-    return () => mediaQuery.removeEventListener("change", syncPhoneStart);
+    return () => {
+      mediaQuery.removeEventListener("change", syncPhoneStart);
+      window.removeEventListener("resize", syncNavbarVisibility);
+      window.removeEventListener("scroll", syncNavbarVisibility);
+    };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      window.dispatchEvent(
+        new CustomEvent("hero-phone-over-header", {
+          detail: { overHeader: false },
+        })
+      );
+    };
   }, []);
 
   useEffect(() => {
@@ -73,7 +111,7 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
   }, [screen, setScreen]);
 
   return (
-    <div ref={containerRef} className="relative h-[122vh] w-full selection:bg-red-500/30 sm:h-[155vh] lg:h-[170vh]">
+    <div ref={containerRef} className="relative h-[122vh] w-full selection:bg-amber-400/30 sm:h-[155vh] lg:h-[170vh]">
       
       {/* Sticky Inner Viewport */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between perspective-[1200px]">
@@ -88,8 +126,8 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
               className="
                 mb-3
                 border
-                border-red-500/20
-                bg-red-500/10
+                border-amber-300/25
+                bg-amber-300/10
                 px-5
                 py-1.5
                 text-[10px]
@@ -97,7 +135,7 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
                 uppercase
                 tracking-[2px]
                 sm:tracking-[5px]
-                text-red-400
+                text-amber-200
                 rounded-full
                 font-semibold
               "
@@ -131,9 +169,9 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
                   lg:text-9xl
                   font-black
                   bg-gradient-to-r
-                  from-red-500
-                  via-red-600
-                  to-orange-500
+                  from-[#8a5a08]
+                  via-[#f6c65b]
+                  to-[#fff1b8]
                   bg-clip-text
                   text-transparent
                   tracking-tighter
@@ -149,7 +187,7 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
             >
               <Link
                 href="/contact"
-                className="flex-1 rounded-full bg-gradient-to-r from-red-600 to-red-500 px-4 py-3 text-center text-[10px] font-black uppercase tracking-wider text-white shadow-[0_8px_26px_rgba(220,38,38,0.24)] transition hover:from-red-500 hover:to-red-400 sm:text-xs"
+                className="flex-1 rounded-full bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] px-4 py-3 text-center text-[10px] font-black uppercase tracking-wider text-black shadow-[0_8px_26px_rgba(245,158,11,0.24)] transition hover:from-[#b77912] hover:via-[#ffd36e] hover:to-[#fff6cf] sm:text-xs"
               >
                 Book Now
               </Link>
@@ -167,7 +205,7 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
         </div>
 
         {/* Interactive Phone Mockup Container (z-50 guarantees it overlays the navbar header z-40) */}
-        <div className="absolute inset-x-0 flex justify-center z-50 pointer-events-none select-none">
+        <div ref={phoneRef} className="absolute inset-x-0 flex justify-center z-50 pointer-events-none select-none">
           <PhoneMockup
             className="pointer-events-auto origin-top"
             style={{

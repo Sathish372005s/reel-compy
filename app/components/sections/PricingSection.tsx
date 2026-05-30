@@ -54,17 +54,17 @@ const plans = [
 
 export default function PricingSection() {
   return (
-    <section className="relative w-full max-w-7xl mx-auto px-4 py-14 pb-20 sm:px-6 sm:py-20 sm:pb-28 lg:py-24 lg:pb-32 z-10 selection:bg-red-500/30">
+    <section className="relative w-full max-w-7xl mx-auto px-4 py-14 pb-20 sm:px-6 sm:py-20 sm:pb-28 lg:py-24 lg:pb-32 z-10 selection:bg-amber-400/30">
       
       {/* Glow Effect */}
-      <div className="absolute bottom-12 right-1/4 hidden h-[250px] w-[500px] rounded-full bg-red-600/5 blur-[100px] pointer-events-none sm:block" />
+      <div className="absolute bottom-12 right-1/4 hidden h-[250px] w-[500px] rounded-full bg-amber-400/8 blur-[100px] pointer-events-none sm:block" />
 
       <div className="text-center mb-10 sm:mb-16 lg:mb-20">
         <motion.span 
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="border border-red-500/20 bg-red-500/10 px-4 py-1.5 text-[10px] sm:text-xs uppercase tracking-[4px] text-red-400 rounded-full font-semibold"
+          className="border border-amber-300/25 bg-amber-300/10 px-4 py-1.5 text-[10px] sm:text-xs uppercase tracking-[4px] text-amber-200 rounded-full font-semibold"
         >
           INVESTMENT & TIER PLANS
         </motion.span>
@@ -75,7 +75,7 @@ export default function PricingSection() {
           transition={{ delay: 0.1 }}
           className="text-3xl sm:text-5xl font-black uppercase text-white mt-5 sm:mt-6 tracking-tight"
         >
-          CHOOSE YOUR <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">VIRAL GEAR</span>
+          CHOOSE YOUR <span className="bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] bg-clip-text text-transparent">VIRAL GEAR</span>
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
@@ -99,13 +99,13 @@ export default function PricingSection() {
             whileHover={{ y: -10 }}
             className={`group relative flex flex-col justify-between border rounded-2xl sm:rounded-[32px] p-5 sm:p-8 md:p-10 transition-all duration-300 shadow-2xl ${
               plan.isPopular
-                ? "border-red-500 bg-gradient-to-b from-zinc-900/60 to-zinc-950/90 ring-1 ring-red-500/30 sm:scale-[1.02] lg:scale-[1.04] z-20"
+                ? "border-amber-300/80 bg-gradient-to-b from-[#171105]/80 to-zinc-950/95 ring-1 ring-amber-300/35 sm:scale-[1.02] lg:scale-[1.04] z-20"
                 : "border-white/5 bg-zinc-950/30 backdrop-blur-xl z-10"
             }`}
           >
-            {/* Glowing red backlighting for popular plans */}
+            {/* Glowing gold backlighting for popular plans */}
             {plan.isPopular && (
-              <div className="absolute inset-0 bg-red-600/5 blur-xl -z-10 rounded-[32px] pointer-events-none" />
+              <div className="absolute inset-0 bg-amber-400/8 blur-xl -z-10 rounded-[32px] pointer-events-none" />
             )}
 
             <div>
@@ -120,7 +120,7 @@ export default function PricingSection() {
                   </h3>
                 </div>
                 {plan.isPopular && (
-                  <span className="shrink-0 text-[8px] sm:text-[9px] bg-red-600 border border-red-500 text-white font-extrabold px-2 sm:px-3 py-1 rounded-full uppercase tracking-widest animate-pulse">
+                  <span className="shrink-0 text-[8px] sm:text-[9px] bg-amber-300 border border-amber-200 text-black font-extrabold px-2 sm:px-3 py-1 rounded-full uppercase tracking-widest animate-pulse">
                     🔥 POPULAR
                   </span>
                 )}
@@ -140,7 +140,7 @@ export default function PricingSection() {
               <ul className="space-y-4 mb-10">
                 {plan.features.map((feature, fIdx) => (
                   <li key={fIdx} className="flex items-center gap-3 text-xs md:text-sm text-zinc-300">
-                    <span className="text-red-500 font-extrabold">✓</span>
+                    <span className="text-amber-300 font-extrabold">✓</span>
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -152,7 +152,7 @@ export default function PricingSection() {
               whileTap={{ scale: 0.98 }}
               className={`w-full py-3.5 sm:py-4 rounded-xl sm:rounded-2xl text-xs font-black uppercase tracking-widest shadow-lg transition-all duration-300 cursor-pointer ${
                 plan.isPopular
-                  ? "bg-gradient-to-r from-red-600 to-red-500 text-white shadow-red-500/20 hover:from-red-500 hover:to-red-400"
+                  ? "bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] text-black shadow-amber-500/20 hover:from-[#b77912] hover:via-[#ffd36e] hover:to-[#fff6cf]"
                   : "bg-white/5 hover:bg-white/10 text-white border border-white/10"
               }`}
             >

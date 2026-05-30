@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import ReelCameraRig from "./ReelCameraRig";
 
 const steps = [
   {
@@ -88,26 +88,19 @@ function DslrCamera({ flashActive, typewriterRun }: { flashActive: boolean; type
   }, [typewriterRun]);
 
   return (
-    <div className="relative h-[310px] w-full max-w-[500px] sm:h-[450px]">
-      <div className="absolute inset-x-8 bottom-20 h-14 rounded-full bg-black/60 blur-2xl sm:bottom-24" />
+    <div className="relative h-[430px] w-full max-w-[330px] sm:h-[620px] sm:max-w-[390px]">
+      <div className="absolute inset-x-8 bottom-12 h-14 rounded-full bg-black/60 blur-2xl sm:bottom-16" />
 
       <motion.div
         animate={flashActive ? { y: [0, -4, 0], scale: [1, 1.015, 1] } : {}}
         transition={{ duration: 0.42, ease: "easeOut" }}
-        className="absolute left-1/2 top-[43%] h-[230px] w-[300px] -translate-x-1/2 -translate-y-1/2 sm:h-[335px] sm:w-[470px]"
+        className="absolute left-1/2 top-[47%] h-full w-full -translate-x-1/2 -translate-y-1/2"
       >
-        <Image
-          src="/dslr-camera-display.png"
-          alt="Real DSLR camera"
-          fill
-          priority={false}
-          sizes="(min-width: 1024px) 470px, (min-width: 640px) 470px, 300px"
-          className="object-contain drop-shadow-[0_28px_38px_rgba(0,0,0,0.62)]"
-        />
+        <ReelCameraRig />
 
         {/* Real-image flash target */}
-        <div className="absolute left-[48%] top-[13%] h-8 w-16 -translate-x-1/2 rounded-full bg-yellow-100/30 blur-sm sm:h-10 sm:w-20" />
-        <div className="absolute left-[48%] top-[13%] h-5 w-10 -translate-x-1/2 rounded-md bg-yellow-50/80 shadow-[0_0_20px_rgba(254,240,138,0.5)] sm:h-6 sm:w-12">
+        <div className="absolute left-[45%] top-[17%] h-8 w-16 -translate-x-1/2 rounded-full bg-yellow-100/30 blur-sm sm:h-10 sm:w-20" />
+        <div className="absolute left-[45%] top-[17%] h-5 w-10 -translate-x-1/2 rounded-md bg-yellow-50/80 shadow-[0_0_20px_rgba(254,240,138,0.5)] sm:h-6 sm:w-12">
         </div>
 
         <AnimatePresence>
@@ -118,7 +111,7 @@ function DslrCamera({ flashActive, typewriterRun }: { flashActive: boolean; type
                 animate={{ scale: [0.15, 2.2, 4.8], opacity: [0, 1, 0] }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="absolute left-[48%] top-[13%] h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white blur-[2px] shadow-[0_0_90px_45px_rgba(255,255,255,1),0_0_180px_95px_rgba(252,211,77,0.55)] pointer-events-none z-30"
+                className="absolute left-[45%] top-[17%] h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white blur-[2px] shadow-[0_0_90px_45px_rgba(255,255,255,1),0_0_180px_95px_rgba(252,211,77,0.55)] pointer-events-none z-30"
               />
               <motion.div
                 initial={{ opacity: 0 }}
@@ -132,15 +125,15 @@ function DslrCamera({ flashActive, typewriterRun }: { flashActive: boolean; type
         </AnimatePresence>
       </motion.div>
 
-      <div className="absolute bottom-4 left-1/2 flex h-14 w-full -translate-x-1/2 items-center justify-center text-center sm:bottom-6">
-        <div className="min-w-[220px] rounded-full border border-red-500/15 bg-black/30 px-4 py-2 backdrop-blur-sm sm:min-w-[250px] sm:px-5">
-          <span className="bg-gradient-to-r from-red-400 via-orange-300 to-white bg-clip-text font-mono text-lg font-black uppercase tracking-[2px] text-transparent drop-shadow-[0_0_18px_rgba(248,113,113,0.38)] sm:text-2xl">
+      <div className="absolute bottom-0 left-1/2 flex h-14 w-full -translate-x-1/2 items-center justify-center text-center sm:bottom-2">
+        <div className="min-w-[220px] rounded-full border border-amber-300/20 bg-black/40 px-4 py-2 backdrop-blur-sm sm:min-w-[250px] sm:px-5">
+          <span className="bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-white bg-clip-text font-mono text-lg font-black uppercase tracking-[2px] text-transparent drop-shadow-[0_0_18px_rgba(245,158,11,0.38)] sm:text-2xl">
           {typedText}
           </span>
           <motion.span
             animate={{ opacity: [1, 0, 1] }}
             transition={{ repeat: Infinity, duration: 0.9, ease: "linear" }}
-            className="ml-1 inline-block h-6 w-[3px] translate-y-1 rounded-full bg-orange-300 shadow-[0_0_12px_rgba(251,146,60,0.9)] sm:h-7"
+            className="ml-1 inline-block h-6 w-[3px] translate-y-1 rounded-full bg-amber-200 shadow-[0_0_12px_rgba(251,191,36,0.9)] sm:h-7"
           />
         </div>
       </div>
@@ -189,17 +182,17 @@ export default function WorkFlowSection() {
 
   return (
     
-    <section className="relative w-full max-w-7xl mx-auto px-4 pt-8 pb-14 sm:px-6 sm:py-20 lg:py-24 z-10 selection:bg-red-500/30">
+    <section className="relative w-full max-w-7xl mx-auto px-4 pt-8 pb-14 sm:px-6 sm:py-20 lg:py-24 z-10 selection:bg-amber-400/30">
       
       {/* Dynamic Background Glow */}
-      <div className="absolute top-1/2 left-1/2 hidden h-[300px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-800/10 blur-[120px] pointer-events-none sm:block" />
+      <div className="absolute top-1/2 left-1/2 hidden h-[300px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-500/10 blur-[120px] pointer-events-none sm:block" />
 
       <div className="text-center mb-10 sm:mb-14 lg:mb-16">
         <motion.span 
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="border border-red-500/20 bg-red-500/10 px-4 py-1.5 text-[10px] sm:text-xs uppercase tracking-[4px] text-red-400 rounded-full font-semibold"
+          className="border border-amber-300/25 bg-amber-300/10 px-4 py-1.5 text-[10px] sm:text-xs uppercase tracking-[4px] text-amber-200 rounded-full font-semibold"
         >
           OUR MASTERPIECE ENGINE
         </motion.span>
@@ -210,7 +203,7 @@ export default function WorkFlowSection() {
           transition={{ delay: 0.1 }}
           className="text-3xl sm:text-5xl font-black uppercase text-white mt-5 sm:mt-6 tracking-tight"
         >
-          HOW WE DELIVER IN <span className="bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">10 MINUTES</span>
+          HOW WE DELIVER IN <span className="bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] bg-clip-text text-transparent">10 MINUTES</span>
         </motion.h2>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
@@ -236,22 +229,22 @@ export default function WorkFlowSection() {
               whileHover={{ x: 6, scale: 1.01 }}
               className="group relative border border-white/5 bg-zinc-950/40 backdrop-blur-xl p-4 sm:p-6 rounded-2xl sm:rounded-3xl flex items-start sm:items-center gap-4 sm:gap-6 overflow-hidden shadow-xl transition-all duration-300"
             >
-              {/* Glowing red top border highlight on hover */}
-              <div className="absolute top-0 inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-red-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Glowing gold top border highlight on hover */}
+              <div className="absolute top-0 inset-y-0 left-0 w-px bg-gradient-to-b from-transparent via-amber-300/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
-              {/* Soft inner red radial glow on hover */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(239,68,68,0.05)_0%,transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Soft inner gold radial glow on hover */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_left,rgba(251,191,36,0.06)_0%,transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div className="flex-shrink-0 text-3xl font-black bg-gradient-to-br from-red-500/40 to-orange-500/20 bg-clip-text text-transparent group-hover:from-red-500 group-hover:to-orange-500 transition-all duration-500">
+              <div className="flex-shrink-0 text-3xl font-black bg-gradient-to-br from-amber-200/80 to-yellow-600/30 bg-clip-text text-transparent group-hover:from-amber-200 group-hover:to-yellow-500 transition-all duration-500">
                 {step.num}
               </div>
 
               <div className="flex-grow">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-sm sm:text-base font-extrabold uppercase text-white group-hover:text-red-400 transition-colors duration-300">
+                  <h3 className="text-sm sm:text-base font-extrabold uppercase text-white group-hover:text-amber-200 transition-colors duration-300">
                     {step.title}
                   </h3>
-                  <span className="text-[8px] bg-red-950/60 border border-red-500/20 text-red-400 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  <span className="text-[8px] bg-yellow-950/60 border border-amber-300/20 text-amber-200 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
                     {step.tag}
                   </span>
                 </div>

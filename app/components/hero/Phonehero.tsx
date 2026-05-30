@@ -32,11 +32,11 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
           transform: "rotateY(0deg)",
         }}
       >
-        {/* Dynamic Red Ambient Glow behind the phone */}
-        <div className="absolute top-12 h-[360px] w-[190px] rounded-full bg-red-600/10 blur-[48px] sm:h-[420px] sm:w-[220px] md:h-[540px] md:w-[280px] md:blur-[60px]" />
+        {/* Dynamic Gold Ambient Glow behind the phone */}
+        <div className="absolute top-12 h-[360px] w-[190px] rounded-full bg-amber-300/12 blur-[48px] sm:h-[420px] sm:w-[220px] md:h-[540px] md:w-[280px] md:blur-[60px]" />
 
         {/* Real iPhone Outer Frame */}
-        <div className="relative h-[91%] w-full rounded-[46px] border-4 border-zinc-800 bg-zinc-950 p-[6px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_40px_rgba(220,38,38,0.2)] ring-2 ring-white/10">
+        <div className="relative h-[91%] w-full rounded-[46px] border-4 border-zinc-800 bg-zinc-950 p-[6px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_42px_rgba(245,158,11,0.2)] ring-2 ring-amber-200/10">
           
           {/* Left Side Buttons (Volume & Ring Switch) */}
           <div className="absolute -left-1.5 top-20 h-8 w-1.5 rounded-l bg-zinc-800 border-l border-white/10" />
@@ -87,7 +87,7 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
                   initial={{ opacity: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4 }}
-                  className="absolute inset-0 bg-gradient-to-br from-[#0a0f1d] via-[#1b0821] to-[#040813] p-4 pt-12 flex flex-col justify-between"
+                  className="absolute inset-0 bg-gradient-to-br from-[#11100b] via-[#050505] to-[#171105] p-4 pt-12 flex flex-col justify-between"
                 >
                   <div className="mt-4 flex flex-col items-center">
                     <span className="text-[10px] uppercase tracking-widest text-zinc-400 font-bold">Friday, May 29</span>
@@ -116,7 +116,7 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
 
                     <div className="flex flex-col items-center gap-1">
                       <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-md overflow-hidden relative p-1.5">
-                        <div className="w-full h-full bg-gradient-to-tr from-yellow-400 via-red-500 to-indigo-600 rounded-full opacity-80" />
+                        <div className="w-full h-full bg-gradient-to-tr from-yellow-200 via-amber-400 to-yellow-700 rounded-full opacity-80" />
                       </div>
                       <span className="text-[9px] text-zinc-300 font-medium">Photos</span>
                     </div>
@@ -134,7 +134,7 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           transition={{ delay: 0.5, type: "spring" }}
-                          className="absolute -top-1 -right-1 bg-red-600 border border-white text-white text-[8px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-sm"
+                          className="absolute -top-1 -right-1 bg-amber-300 border border-white text-black text-[8px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-sm"
                         >
                           1
                         </motion.div>
@@ -196,7 +196,7 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
                       </svg>
                       
                       <div className="relative">
-                        <div className="w-7.5 h-7.5 rounded-full bg-gradient-to-r from-red-500 to-orange-500 flex items-center justify-center text-[10px] font-black text-white">
+                        <div className="w-7.5 h-7.5 rounded-full bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] flex items-center justify-center text-[10px] font-black text-black">
                           FL
                         </div>
                         <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-black rounded-full" />
@@ -219,7 +219,7 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
 
                   <div className="flex-grow overflow-y-auto py-4 space-y-4 pr-0.5 flex flex-col justify-end">
                     <div className="flex items-end gap-1.5 w-[90%]">
-                      <div className="w-5 h-5 rounded-full bg-gradient-to-r from-red-600 to-red-500 flex items-center justify-center text-[7px] font-black flex-shrink-0">
+                      <div className="w-5 h-5 rounded-full bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] flex items-center justify-center text-[7px] font-black text-black flex-shrink-0">
                         FL
                       </div>
                       <div className="bg-zinc-900 border border-white/5 text-[9px] px-3 py-2 rounded-[18px] rounded-bl-none text-zinc-100 leading-tight">
@@ -233,17 +233,17 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
                       transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
                       className="flex items-end gap-1.5 w-[94%]"
                     >
-                      <div className="w-5 h-5 rounded-full bg-gradient-to-r from-red-600 to-red-500 flex items-center justify-center text-[7px] font-black flex-shrink-0 opacity-0" />
+                      <div className="w-5 h-5 rounded-full bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] flex items-center justify-center text-[7px] font-black flex-shrink-0 opacity-0" />
                       
-                      <div className="bg-gradient-to-br from-zinc-950 to-zinc-900 border border-red-500/20 rounded-2xl p-2.5 flex flex-col gap-2.5 shadow-[0_4px_15px_rgba(239,68,68,0.1)] w-full">
+                      <div className="bg-gradient-to-br from-zinc-950 to-[#151006] border border-amber-300/20 rounded-2xl p-2.5 flex flex-col gap-2.5 shadow-[0_4px_15px_rgba(245,158,11,0.1)] w-full">
                         <div className="relative h-24 rounded-lg bg-zinc-800 overflow-hidden flex items-center justify-center">
-                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.25)_0%,transparent_75%)] z-0" />
+                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(251,191,36,0.24)_0%,transparent_75%)] z-0" />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 z-10" />
                           
                           <motion.div 
                             animate={{ scale: [1, 1.08, 1] }}
                             transition={{ repeat: Infinity, duration: 1.8 }}
-                            className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center shadow-[0_0_15px_rgba(220,38,38,0.5)] z-20 cursor-pointer"
+                            className="w-8 h-8 rounded-full bg-amber-300 flex items-center justify-center shadow-[0_0_15px_rgba(251,191,36,0.5)] z-20 cursor-pointer"
                           >
                             <svg className="w-3.5 h-3.5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M8 5v14l11-7z" />
@@ -272,7 +272,7 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
                         <motion.button 
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
-                          className="w-full bg-gradient-to-r from-red-600 to-red-500 py-1.5 rounded-lg text-[9px] font-extrabold uppercase tracking-widest text-white shadow-[0_2px_10px_rgba(220,38,38,0.3)] flex items-center justify-center gap-1 cursor-pointer transition hover:from-red-500 hover:to-red-400 pointer-events-auto"
+                          className="w-full bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] py-1.5 rounded-lg text-[9px] font-extrabold uppercase tracking-widest text-black shadow-[0_2px_10px_rgba(245,158,11,0.3)] flex items-center justify-center gap-1 cursor-pointer transition hover:from-[#b77912] hover:via-[#ffd36e] hover:to-[#fff6cf] pointer-events-auto"
                         >
                           🚀 Post to Reels
                         </motion.button>
@@ -285,7 +285,7 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
                       transition={{ delay: 0.8 }}
                       className="flex items-end gap-1.5 w-[90%]"
                     >
-                      <div className="w-5 h-5 rounded-full bg-gradient-to-r from-red-600 to-red-500 flex items-center justify-center text-[7px] font-black flex-shrink-0">
+                      <div className="w-5 h-5 rounded-full bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] flex items-center justify-center text-[7px] font-black text-black flex-shrink-0">
                         FL
                       </div>
                       <div className="bg-zinc-900 border border-white/5 text-[9px] px-3 py-2 rounded-[18px] rounded-bl-none text-zinc-100 leading-tight">
@@ -414,7 +414,7 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
           >
             <Image src="/iph.png" alt="iPhone logo" width={40} height={40} className="opacity-45" />
           </motion.div>
-          <div className="bg-gradient-to-r from-red-400 via-orange-300 to-white bg-clip-text text-sm font-black uppercase tracking-[3px] text-transparent drop-shadow-[0_0_16px_rgba(248,113,113,0.35)]">
+          <div className="bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-white bg-clip-text text-sm font-black uppercase tracking-[3px] text-transparent drop-shadow-[0_0_16px_rgba(245,158,11,0.35)]">
             Capture Your Moment
           </div>
           <div className="text-[10px] font-black tracking-[4px] text-zinc-500 uppercase">

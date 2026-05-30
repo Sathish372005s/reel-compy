@@ -9,7 +9,7 @@ export default function GridLines() {
         >
           {/* Periodic glowing laser/light pulse */}
           <div
-            className="absolute left-[-1px] w-[3px] h-[25vh] bg-gradient-to-b from-transparent via-red-500 to-transparent rounded-full blur-[1px]"
+            className="absolute left-[-1px] w-[3px] h-[25vh] bg-gradient-to-b from-transparent via-amber-300 to-transparent rounded-full blur-[1px]"
             style={{
               animation: "gridLinePulse 6s cubic-bezier(0.25, 1, 0.5, 1) infinite",
               animationDelay: `${i * 1.5}s`,

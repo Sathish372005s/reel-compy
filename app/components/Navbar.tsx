@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Aperture, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface NavLinkProps {
   href: string;
@@ -34,30 +34,30 @@ function NavLink({
       onMouseLeave={() => setHovered(false)}
       className={`relative ${
         mobile
-          ? "w-full rounded-xl border border-white/5 bg-white/[0.03] px-4 py-3 text-left"
+          ? "w-full rounded-xl border border-amber-300/10 bg-[#090805]/80 px-4 py-3 text-left"
           : "px-3 py-1.5 sm:px-4 sm:py-2"
-      } text-xs font-black uppercase tracking-wider ${active ? "text-white" : "text-zinc-400"} hover:text-white transition-colors duration-300 flex flex-col ${mobile ? "items-start" : "items-center"} gap-0.5 rounded-xl select-none`}
+      } text-xs font-black uppercase tracking-wider ${active ? "text-amber-100" : "text-zinc-400"} hover:text-amber-100 transition-colors duration-300 flex flex-col ${mobile ? "items-start" : "items-center"} gap-0.5 rounded-xl select-none`}
     >
       {/* Corners */}
       {!mobile && (
         <>
           <motion.span
-            className="absolute top-0.5 left-0.5 w-2 h-2 border-t border-l border-red-500/80"
+            className="absolute top-0.5 left-0.5 w-2 h-2 border-t border-l border-amber-300/90"
             initial={{ opacity: 0 }}
             animate={showCorners ? { opacity: 1 } : { opacity: 0 }}
           />
           <motion.span
-            className="absolute top-0.5 right-0.5 w-2 h-2 border-t border-r border-red-500/80"
+            className="absolute top-0.5 right-0.5 w-2 h-2 border-t border-r border-amber-300/90"
             initial={{ opacity: 0 }}
             animate={showCorners ? { opacity: 1 } : { opacity: 0 }}
           />
           <motion.span
-            className="absolute bottom-0.5 left-0.5 w-2 h-2 border-b border-l border-red-500/80"
+            className="absolute bottom-0.5 left-0.5 w-2 h-2 border-b border-l border-amber-300/90"
             initial={{ opacity: 0 }}
             animate={showCorners ? { opacity: 1 } : { opacity: 0 }}
           />
           <motion.span
-            className="absolute bottom-0.5 right-0.5 w-2 h-2 border-b border-r border-red-500/80"
+            className="absolute bottom-0.5 right-0.5 w-2 h-2 border-b border-r border-amber-300/90"
             initial={{ opacity: 0 }}
             animate={showCorners ? { opacity: 1 } : { opacity: 0 }}
           />
@@ -68,7 +68,7 @@ function NavLink({
         {label}
       </span>
 
-      <span className="text-[8px] tracking-[2px] uppercase font-mono text-zinc-500">
+      <span className="text-[8px] tracking-[2px] uppercase font-mono text-amber-200/45">
         {subLabel}
       </span>
     </Link>
@@ -86,25 +86,46 @@ const navItems = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hiddenByPhone, setHiddenByPhone] = useState(false);
   const pathname = usePathname();
   const isActive = (href: string) => pathname === href;
 
+  useEffect(() => {
+    const handlePhoneOverHeader = (event: Event) => {
+      const { overHeader } = (event as CustomEvent<{ overHeader: boolean }>).detail;
+      setHiddenByPhone((current) => (current === overHeader ? current : overHeader));
+      if (overHeader) {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("hero-phone-over-header", handlePhoneOverHeader);
+    return () => {
+      window.removeEventListener("hero-phone-over-header", handlePhoneOverHeader);
+    };
+  }, []);
+
   return (
-    <div className="fixed top-0 inset-x-0 z-50 flex flex-col">
+    <motion.div
+      data-site-navbar
+      animate={hiddenByPhone ? { opacity: 0, y: -24 } : { opacity: 1, y: 0 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
+      className={`fixed top-0 inset-x-0 z-50 flex flex-col ${hiddenByPhone ? "pointer-events-none" : ""}`}
+    >
       <div className="w-[94%] sm:w-[92%] mx-auto mt-2 sm:mt-4 flex items-center justify-between gap-2">
 
         {/* LEFT */}
-        <div className="flex min-w-0 flex-1 items-center gap-4 rounded-2xl border border-white/10 bg-[#0c0c0e]/80 px-3 py-2.5 shadow-[0_4px_22px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:flex-none sm:gap-6 sm:px-4 sm:py-3">
+        <div className="flex min-w-0 flex-1 items-center gap-4 rounded-2xl border border-amber-300/15 bg-[#070604]/88 px-3 py-2.5 shadow-[0_4px_26px_rgba(0,0,0,0.55),0_0_30px_rgba(245,158,11,0.08)] backdrop-blur-xl sm:flex-none sm:gap-6 sm:px-4 sm:py-3">
 
           {/* Logo */}
           <Link
             href="/"
             className="group flex min-w-0 items-center gap-2 text-white"
           >
-            <Aperture className="h-5 w-5 shrink-0 text-red-500 transition-transform duration-500 group-hover:rotate-180" />
+            <Aperture className="h-5 w-5 shrink-0 text-amber-300 drop-shadow-[0_0_16px_rgba(251,191,36,0.55)] transition-transform duration-500 group-hover:rotate-180" />
 
             <h1 className="truncate text-xs font-black uppercase tracking-[0.16em] sm:text-sm md:text-base md:tracking-[0.2em]">
-              sindhu<span className="text-red-500"></span>...
+              sindhu<span className="text-amber-300"></span>...
             </h1>
           </Link>
 
@@ -126,10 +147,10 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
 
           {/* Desktop Buttons */}
-          <div className="hidden md:flex items-center gap-2 rounded-2xl border border-white/10 bg-[#0c0c0e]/70 backdrop-blur-xl px-4 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+          <div className="hidden md:flex items-center gap-2 rounded-2xl border border-amber-300/15 bg-[#070604]/78 backdrop-blur-xl px-4 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.58)]">
             <Link
               href="/contact"
-              className="rounded-full px-5 py-2 text-[10px] font-black uppercase tracking-wider text-white bg-gradient-to-r from-red-600 to-red-500"
+              className="rounded-full px-5 py-2 text-[10px] font-black uppercase tracking-wider text-black bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] shadow-[0_0_24px_rgba(245,158,11,0.22)]"
             >
               Book Now
             </Link>
@@ -145,7 +166,7 @@ export default function Navbar() {
           {/* MOBILE MENU BUTTON */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-[#0c0c0e]/85 text-white backdrop-blur-xl sm:h-12 sm:w-12"
+            className="lg:hidden flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-amber-300/15 bg-[#070604]/90 text-amber-100 backdrop-blur-xl sm:h-12 sm:w-12"
             aria-label="Toggle navigation menu"
             aria-expanded={menuOpen}
           >
@@ -162,7 +183,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
-            className="lg:hidden mt-2 mx-auto w-[94%] rounded-2xl border border-white/10 bg-[#0c0c0e]/96 backdrop-blur-2xl overflow-hidden shadow-2xl"
+            className="lg:hidden mt-2 mx-auto w-[94%] rounded-2xl border border-amber-300/15 bg-[#070604]/96 backdrop-blur-2xl overflow-hidden shadow-2xl"
           >
             <div className="grid grid-cols-2 gap-2 p-3">
               {navItems.map((item) => (
@@ -181,7 +202,7 @@ export default function Navbar() {
                 <Link
                   href="/contact"
                   onClick={() => setMenuOpen(false)}
-                  className="w-full rounded-xl bg-gradient-to-r from-red-600 to-red-500 px-4 py-3 text-center text-[10px] font-black uppercase tracking-wider text-white"
+                  className="w-full rounded-xl bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] px-4 py-3 text-center text-[10px] font-black uppercase tracking-wider text-black"
                 >
                   Book Now
                 </Link>
@@ -198,6 +219,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }

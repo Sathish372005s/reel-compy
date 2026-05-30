@@ -1,7 +1,7 @@
 export default function OrangeGlow() {
   return (
     <>
-      {/* Main Red Glow */}
+      {/* Main Gold Glow */}
       <div
         className="
           absolute
@@ -12,7 +12,7 @@ export default function OrangeGlow() {
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
-          bg-red-600/20
+          bg-amber-400/18
           blur-[220px]
         "
       />
@@ -25,7 +25,7 @@ export default function OrangeGlow() {
           top-0
           h-[600px]
           w-[600px]
-          bg-orange-500/10
+          bg-yellow-300/10
           blur-[180px]
         "
       />
@@ -38,7 +38,7 @@ export default function OrangeGlow() {
           left-1/3
           h-[400px]
           w-[400px]
-          bg-red-500/10
+          bg-amber-500/10
           blur-[150px]
         "
       />

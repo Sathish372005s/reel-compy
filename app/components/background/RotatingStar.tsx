@@ -27,18 +27,18 @@ export default function RotatingStar({
     >
 
       {/* Vertical */}
-      <div className="absolute left-1/2 top-0 h-full w-px bg-red-400/70" />
+      <div className="absolute left-1/2 top-0 h-full w-px bg-amber-200/70" />
 
       {/* Horizontal */}
-      <div className="absolute left-0 top-1/2 h-px w-full bg-red-400/70" />
+      <div className="absolute left-0 top-1/2 h-px w-full bg-amber-200/70" />
 
       {/* Diagonal */}
       <div className="absolute inset-0 rotate-45">
-        <div className="absolute left-1/2 top-0 h-full w-px bg-red-400/70" />
+        <div className="absolute left-1/2 top-0 h-full w-px bg-amber-200/70" />
       </div>
 
       <div className="absolute inset-0 -rotate-45">
-        <div className="absolute left-1/2 top-0 h-full w-px bg-red-400/70" />
+        <div className="absolute left-1/2 top-0 h-full w-px bg-amber-200/70" />
       </div>
     </div>
   );

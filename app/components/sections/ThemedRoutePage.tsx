@@ -21,15 +21,15 @@ export default function ThemedRoutePage({
   cta = "Book Now",
 }: ThemedRoutePageProps) {
   return (
-    <main className="relative min-h-screen px-4 pb-16 pt-28 text-white selection:bg-red-500/30 sm:px-6 sm:pb-24 sm:pt-36">
-      <div className="absolute left-1/2 top-28 hidden h-72 w-[640px] -translate-x-1/2 rounded-full bg-red-700/10 blur-[120px] pointer-events-none sm:block sm:top-36" />
+    <main className="relative min-h-screen px-4 pb-16 pt-28 text-white selection:bg-amber-400/30 sm:px-6 sm:pb-24 sm:pt-36">
+      <div className="absolute left-1/2 top-28 hidden h-72 w-[640px] -translate-x-1/2 rounded-full bg-amber-500/10 blur-[120px] pointer-events-none sm:block sm:top-36" />
 
       <section className="relative z-10 mx-auto flex max-w-6xl flex-col gap-8 sm:gap-12">
         <div className="max-w-3xl">
           <motion.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex rounded-full border border-red-500/20 bg-red-500/10 px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[4px] text-red-400"
+            className="inline-flex rounded-full border border-amber-300/25 bg-amber-300/10 px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[4px] text-amber-200"
           >
             {eyebrow}
           </motion.span>
@@ -41,7 +41,7 @@ export default function ThemedRoutePage({
             className="mt-5 text-4xl font-black uppercase tracking-tight text-white sm:mt-6 sm:text-6xl"
           >
             {title}{" "}
-            <span className="bg-gradient-to-r from-red-500 to-orange-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] bg-clip-text text-transparent">
               {accent}
             </span>
           </motion.h1>
@@ -65,8 +65,8 @@ export default function ThemedRoutePage({
               transition={{ delay: 0.12 + index * 0.08 }}
               className="group relative overflow-hidden rounded-2xl border border-white/5 bg-zinc-950/40 p-5 shadow-xl backdrop-blur-xl sm:rounded-3xl sm:p-6"
             >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(239,68,68,0.09),transparent_45%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="relative text-3xl font-black text-red-500/60">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(251,191,36,0.1),transparent_45%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative text-3xl font-black text-amber-300/70">
                 {String(index + 1).padStart(2, "0")}
               </div>
               <p className="relative mt-6 text-sm font-bold uppercase tracking-wide text-white">
@@ -84,7 +84,7 @@ export default function ThemedRoutePage({
         >
           <Link
             href="/contact"
-            className="rounded-full bg-gradient-to-r from-red-600 to-red-500 px-6 py-3 text-xs font-black uppercase tracking-wider text-white shadow-[0_8px_26px_rgba(220,38,38,0.22)]"
+            className="rounded-full bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] px-6 py-3 text-xs font-black uppercase tracking-wider text-black shadow-[0_8px_26px_rgba(245,158,11,0.22)]"
           >
             {cta}
           </Link>
