@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Aperture, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
@@ -10,6 +11,8 @@ interface NavLinkProps {
   label: string;
   subLabel: string;
   mobile?: boolean;
+  active?: boolean;
+  onClick?: () => void;
 }
 
 function NavLink({
@@ -17,19 +20,23 @@ function NavLink({
   label,
   subLabel,
   mobile = false,
+  active = false,
+  onClick,
 }: NavLinkProps) {
   const [hovered, setHovered] = useState(false);
+  const showCorners = hovered || active;
 
   return (
-    <a
+    <Link
       href={href}
+      onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={`relative ${
         mobile
           ? "w-full py-4 text-center border-b border-white/10"
           : "px-3 py-1.5 sm:px-4 sm:py-2"
-      } text-xs font-black uppercase tracking-wider text-zinc-400 hover:text-white transition-colors duration-300 flex flex-col items-center gap-0.5 rounded-xl select-none`}
+      } text-xs font-black uppercase tracking-wider ${active ? "text-white" : "text-zinc-400"} hover:text-white transition-colors duration-300 flex flex-col items-center gap-0.5 rounded-xl select-none`}
     >
       {/* Corners */}
       {!mobile && (
@@ -37,22 +44,22 @@ function NavLink({
           <motion.span
             className="absolute top-0.5 left-0.5 w-2 h-2 border-t border-l border-red-500/80"
             initial={{ opacity: 0 }}
-            animate={hovered ? { opacity: 1 } : { opacity: 0 }}
+            animate={showCorners ? { opacity: 1 } : { opacity: 0 }}
           />
           <motion.span
             className="absolute top-0.5 right-0.5 w-2 h-2 border-t border-r border-red-500/80"
             initial={{ opacity: 0 }}
-            animate={hovered ? { opacity: 1 } : { opacity: 0 }}
+            animate={showCorners ? { opacity: 1 } : { opacity: 0 }}
           />
           <motion.span
             className="absolute bottom-0.5 left-0.5 w-2 h-2 border-b border-l border-red-500/80"
             initial={{ opacity: 0 }}
-            animate={hovered ? { opacity: 1 } : { opacity: 0 }}
+            animate={showCorners ? { opacity: 1 } : { opacity: 0 }}
           />
           <motion.span
             className="absolute bottom-0.5 right-0.5 w-2 h-2 border-b border-r border-red-500/80"
             initial={{ opacity: 0 }}
-            animate={hovered ? { opacity: 1 } : { opacity: 0 }}
+            animate={showCorners ? { opacity: 1 } : { opacity: 0 }}
           />
         </>
       )}
@@ -64,12 +71,23 @@ function NavLink({
       <span className="text-[8px] tracking-[2px] uppercase font-mono text-zinc-500">
         {subLabel}
       </span>
-    </a>
+    </Link>
   );
 }
 
+const navItems = [
+  { href: "/", label: "Home", subLabel: "start" },
+  { href: "/services", label: "Services", subLabel: "shoot" },
+  { href: "/pricing", label: "Pricing", subLabel: "plans" },
+  { href: "/contact", label: "Contact", subLabel: "book" },
+  { href: "/about", label: "About", subLabel: "studio" },
+  { href: "/works", label: "Works", subLabel: "reels" },
+];
+
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isActive = (href: string) => pathname === href;
 
   return (
     <div className="fixed top-0 inset-x-0 z-50 flex flex-col">
@@ -86,16 +104,21 @@ export default function Navbar() {
             <Aperture className="h-5 w-5 text-red-500 transition-transform duration-500 group-hover:rotate-180" />
 
             <h1 className="text-sm md:text-base font-black tracking-[0.2em] uppercase">
-              sathish<span className="text-red-500">⚡</span>...
+              sindhu<span className="text-red-500"></span>...
             </h1>
           </Link>
 
           {/* Desktop Links */}
           <div className="hidden lg:flex items-center gap-1">
-            <NavLink href="#" label="Shoot" subLabel="focal" />
-            <NavLink href="#" label="Reels" subLabel="shutter" />
-            <NavLink href="#" label="Bespoke" subLabel="creative" />
-            <NavLink href="#" label="Deliveries" subLabel="gallery" />
+            {navItems.map((item) => (
+              <NavLink
+                key={item.href}
+                href={item.href}
+                label={item.label}
+                subLabel={item.subLabel}
+                active={isActive(item.href)}
+              />
+            ))}
           </div>
         </div>
 
@@ -104,25 +127,26 @@ export default function Navbar() {
 
           {/* Desktop Buttons */}
           <div className="hidden md:flex items-center gap-2 rounded-2xl border border-white/10 bg-[#0c0c0e]/70 backdrop-blur-xl px-4 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
-            <a
-              href="#"
+            <Link
+              href="/contact"
               className="rounded-full px-5 py-2 text-[10px] font-black uppercase tracking-wider text-white bg-gradient-to-r from-red-600 to-red-500"
             >
               Book Now
-            </a>
+            </Link>
 
-            <a
-              href="#"
+            <Link
+              href="/services"
               className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-black uppercase tracking-wider text-white"
             >
               Our Services
-            </a>
+            </Link>
           </div>
 
           {/* MOBILE MENU BUTTON */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="lg:hidden flex items-center justify-center w-12 h-12 rounded-2xl border border-white/10 bg-[#0c0c0e]/70 backdrop-blur-xl text-white"
+            aria-label="Toggle navigation menu"
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -140,48 +164,34 @@ export default function Navbar() {
             className="lg:hidden mt-3 mx-auto w-[94%] rounded-3xl border border-white/10 bg-[#0c0c0e]/95 backdrop-blur-2xl overflow-hidden shadow-2xl"
           >
             <div className="flex flex-col p-4">
-              <NavLink
-                href="#"
-                label="Shoot"
-                subLabel="focal"
-                mobile
-              />
-
-              <NavLink
-                href="#"
-                label="Reels"
-                subLabel="shutter"
-                mobile
-              />
-
-              <NavLink
-                href="#"
-                label="Bespoke"
-                subLabel="creative"
-                mobile
-              />
-
-              <NavLink
-                href="#"
-                label="Deliveries"
-                subLabel="gallery"
-                mobile
-              />
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.href}
+                  href={item.href}
+                  label={item.label}
+                  subLabel={item.subLabel}
+                  active={isActive(item.href)}
+                  onClick={() => setMenuOpen(false)}
+                  mobile
+                />
+              ))}
 
               <div className="flex flex-col gap-3 mt-6">
-                <a
-                  href="#"
+                <Link
+                  href="/contact"
+                  onClick={() => setMenuOpen(false)}
                   className="w-full text-center rounded-full px-5 py-3 text-xs font-black uppercase tracking-wider text-white bg-gradient-to-r from-red-600 to-red-500"
                 >
                   Book Now
-                </a>
+                </Link>
 
-                <a
-                  href="#"
+                <Link
+                  href="/services"
+                  onClick={() => setMenuOpen(false)}
                   className="w-full text-center rounded-full border border-white/10 bg-white/5 px-5 py-3 text-xs font-black uppercase tracking-wider text-white"
                 >
                   Our Services
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>

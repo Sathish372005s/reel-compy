@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import BackgroundWrapper from "./components/background/BackgroundWrapper";
+import RouteTransition from "./components/RouteTransition";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
           <BackgroundWrapper />
         </div>
         <Navbar />
+        <RouteTransition />
         <div className="relative z-10 flex-1">{children}</div>
       </body>
     </html>

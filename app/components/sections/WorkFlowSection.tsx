@@ -97,7 +97,7 @@ function DslrCamera({ flashActive, typewriterRun }: { flashActive: boolean; type
         className="absolute left-1/2 top-[43%] h-[270px] w-[360px] -translate-x-1/2 -translate-y-1/2 sm:h-[335px] sm:w-[470px]"
       >
         <Image
-          src="/dslr-camera.png"
+          src="/dslr-camera-display.png"
           alt="Real DSLR camera"
           fill
           priority={false}
