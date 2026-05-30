@@ -9,7 +9,7 @@ export default function HomePage() {
   const [screen, setScreen] = useState<"home" | "splash" | "instagram">("home");
 
   return (
-    <main className="bg-[#050505] min-h-screen text-white relative">
+    <main className="min-h-screen text-white relative">
 
       {/* 
         Hero Section containing the scrollable phone mockup.

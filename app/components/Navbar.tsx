@@ -86,7 +86,7 @@ export default function Navbar() {
             <Aperture className="h-5 w-5 text-red-500 transition-transform duration-500 group-hover:rotate-180" />
 
             <h1 className="text-sm md:text-base font-black tracking-[0.2em] uppercase">
-              FLA<span className="text-red-500">⚡</span>HOOT
+              sathish<span className="text-red-500">⚡</span>...
             </h1>
           </Link>
 

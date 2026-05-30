@@ -2,7 +2,6 @@
 
 import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
-import BackgroundWrapper from "../background/BackgroundWrapper";
 import PhoneMockup from "./Phonehero";
 
 interface HeroSectionProps {
@@ -60,54 +59,10 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
   }, [screen, setScreen]);
 
   return (
-    <div ref={containerRef} className="relative h-[180vh] w-full bg-[#050505] selection:bg-red-500/30">
+    <div ref={containerRef} className="relative h-[180vh] w-full selection:bg-red-500/30">
       
       {/* Sticky Inner Viewport */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between perspective-[1200px]">
-        
-        {/* PREMIUM BACKGROUND - Restored completely intact as originally configured */}
-        <div className="absolute inset-0 bg-[#050505] z-0">
-          
-          {/* Main Red Glow */}
-          <div
-            className="
-              absolute
-              inset-0
-              bg-[radial-gradient(ellipse_at_top,rgba(120,0,0,0.55),transparent_55%)]
-            "
-          />
-
-          {/* Top Glow */}
-          <div
-            className="
-              absolute
-              top-0
-              left-1/2
-              -translate-x-1/2
-              w-[1000px]
-              h-[500px]
-              bg-red-700/20
-              blur-[160px]
-            "
-          />
-
-          {/* Bottom Fade */}
-          <div
-            className="
-              absolute
-              inset-0
-              bg-gradient-to-b
-              from-transparent
-              via-transparent
-              to-black
-            "
-          />
-
-        </div>
-
-        {/* Background Effects (Rotating Stars, Grid Lines, Noise) - Restored at Hero-level */}
-        <BackgroundWrapper />
-
         {/* Dynamic Foreground Content */}
         <div className="relative  z-10 flex flex-col h-full w-full justify-between pb-0">
 
@@ -133,7 +88,7 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
                 font-semibold
               "
             >
-              WORLD'S FIRST QUICK CONTENT SERVICE
+              WORLD&apos;S FIRST QUICK CONTENT SERVICE
             </motion.span>
             {/* CTA BUTTONS: Book Now & Our Services */}
            

@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import type { MotionStyle, MotionValue } from "framer-motion";
 
 interface PhoneMockupProps {
   className?: string;
-  style?: any;
+  style?: MotionStyle;
   screen: "home" | "splash" | "instagram";
   setScreen?: (screen: "home" | "splash" | "instagram") => void;
-  rotateY?: any;
+  rotateY?: number | string | MotionValue<number> | MotionValue<string>;
   flashActive?: boolean;
 }
 
@@ -35,7 +36,7 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
         <div className="absolute top-12 h-[420px] w-[220px] rounded-full bg-red-600/10 blur-[60px] md:h-[540px] md:w-[280px]" />
 
         {/* Real iPhone Outer Frame */}
-        <div className="relative h-full w-full rounded-[46px] border-4 border-zinc-800 bg-zinc-950 p-[6px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_40px_rgba(220,38,38,0.2)] ring-2 ring-white/10">
+        <div className="relative h-[91%] w-full rounded-[46px] border-4 border-zinc-800 bg-zinc-950 p-[6px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_40px_rgba(220,38,38,0.2)] ring-2 ring-white/10">
           
           {/* Left Side Buttons (Volume & Ring Switch) */}
           <div className="absolute -left-1.5 top-20 h-8 w-1.5 rounded-l bg-zinc-800 border-l border-white/10" />
@@ -313,34 +314,55 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
       </div>
 
       {/* BACK SIDE */}
-      <div 
-        className="absolute inset-0 w-full h-full bg-[#0c0c0c] border-4 border-zinc-800 rounded-[46px] p-6 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_40px_rgba(220,38,38,0.15)] ring-2 ring-white/10 flex flex-col items-center justify-between"
+      <div
+        className="absolute inset-0 w-full h-full overflow-hidden bg-[#070808] border-4 border-[#26394a] rounded-[46px] p-6 shadow-[inset_0_1px_12px_rgba(255,255,255,0.05),0_25px_60px_-15px_rgba(0,0,0,0.9)] ring-2 ring-white/10 flex flex-col items-center justify-between"
         style={{ 
           backfaceVisibility: "hidden", 
           WebkitBackfaceVisibility: "hidden",
           transform: "rotateY(180deg)",
         }}
       >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_58%_12%,rgba(255,255,255,0.07),transparent_30%),linear-gradient(145deg,rgba(255,255,255,0.03),transparent_42%,rgba(0,0,0,0.35))]" />
+
+        {/* Left Side Buttons (Ring & Volume) */}
+        <div className="absolute -left-1.5 top-24 h-10 w-1.5 rounded-l bg-[#172635] border-l border-white/15 shadow-[inset_1px_0_1px_rgba(255,255,255,0.2)]" />
+        <div className="absolute -left-1.5 top-40 h-14 w-1.5 rounded-l bg-[#172635] border-l border-white/15 shadow-[inset_1px_0_1px_rgba(255,255,255,0.2)]" />
+        <div className="absolute -left-1.5 top-56 h-14 w-1.5 rounded-l bg-[#172635] border-l border-white/15 shadow-[inset_1px_0_1px_rgba(255,255,255,0.2)]" />
+
+        {/* Right Side Button (Power) */}
+        <div className="absolute -right-1.5 top-40 h-20 w-1.5 rounded-r bg-[#172635] border-r border-white/15 shadow-[inset_-1px_0_1px_rgba(255,255,255,0.2)]" />
         {/* Back Camera Module (Top Left) */}
-        <div className="absolute top-6 left-6 w-20 h-20 md:w-24 md:h-24 bg-zinc-900 border border-white/5 rounded-3xl p-2 md:p-2.5 grid grid-cols-2 gap-2 shadow-inner">
-          {/* 3 Camera Lenses */}
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="relative w-7 h-7 md:w-8 md:h-8 rounded-full bg-black border border-zinc-800 flex items-center justify-center overflow-hidden">
-              <div className="w-3.5 h-3.5 md:w-4.5 md:h-4.5 rounded-full bg-zinc-950 border border-blue-900/60" />
-              <div className="absolute top-1 left-1 w-1.5 h-1.5 rounded-full bg-white/15 blur-[0.5px]" />
+        <div className="absolute top-6 left-6 h-28 w-28 rounded-[30px] border border-[#203347]/70 bg-[#8fa2ad] shadow-[inset_0_1px_1px_rgba(255,255,255,0.55),0_10px_24px_rgba(22,33,45,0.32)] md:h-32 md:w-32 md:rounded-[34px]">
+          <div className="absolute inset-1 rounded-[26px] border border-white/35 bg-[linear-gradient(145deg,rgba(255,255,255,0.28),rgba(26,45,62,0.2))] md:rounded-[30px]" />
+
+          <div className="absolute left-4 top-3.5 h-11 w-11 rounded-full border-[3px] border-[#172b3d] bg-[#cad5d9] shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),0_3px_7px_rgba(15,27,38,0.45)] md:left-5 md:top-4 md:h-12 md:w-12">
+            <div className="absolute inset-1 rounded-full border border-white/45 bg-black flex items-center justify-center overflow-hidden">
+              <div className="h-5 w-5 rounded-full bg-[radial-gradient(circle_at_35%_30%,#3d78d9_0%,#07101d_45%,#010205_100%)] border border-blue-400/30" />
+              <div className="absolute left-2 top-1.5 h-2 w-2 rounded-full bg-white/40 blur-[1px]" />
             </div>
-          ))}
+          </div>
+
+          <div className="absolute right-3.5 top-10 h-11 w-11 rounded-full border-[3px] border-[#172b3d] bg-[#cad5d9] shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),0_3px_7px_rgba(15,27,38,0.45)] md:right-4 md:top-11 md:h-12 md:w-12">
+            <div className="absolute inset-1 rounded-full border border-white/45 bg-black flex items-center justify-center overflow-hidden">
+              <div className="h-5 w-5 rounded-full bg-[radial-gradient(circle_at_65%_35%,#3873d8_0%,#07101d_45%,#010205_100%)] border border-blue-400/30" />
+              <div className="absolute right-2 top-1.5 h-2 w-2 rounded-full bg-white/35 blur-[1px]" />
+            </div>
+          </div>
+
+          <div className="absolute bottom-3.5 left-4 h-11 w-11 rounded-full border-[3px] border-[#172b3d] bg-[#cad5d9] shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),0_3px_7px_rgba(15,27,38,0.45)] md:bottom-4 md:left-5 md:h-12 md:w-12">
+            <div className="absolute inset-1 rounded-full border border-white/45 bg-black flex items-center justify-center overflow-hidden">
+              <div className="h-5 w-5 rounded-full bg-[radial-gradient(circle_at_40%_40%,#306acb_0%,#07101d_45%,#010205_100%)] border border-blue-400/30" />
+              <div className="absolute left-2 top-1.5 h-2 w-2 rounded-full bg-white/35 blur-[1px]" />
+            </div>
+          </div>
 
           {/* Camera Flash LED */}
-          <div className="relative w-7 h-7 md:w-8 md:h-8 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center overflow-hidden">
-            <div className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-yellow-100/90 flex items-center justify-center relative">
-              {/* LED center point */}
-              <div className="w-1.5 h-1.5 rounded-full bg-yellow-500/80" />
-              
-              {/* Flash Glow Pulse overlay */}
+          <div className="absolute right-5 top-3 h-6 w-6 rounded-full border border-white/50 bg-[#d7e0e2] flex items-center justify-center shadow-[inset_0_1px_2px_rgba(255,255,255,0.9)] md:right-6 md:top-4 md:h-7 md:w-7">
+            <div className="relative h-4 w-4 rounded-full bg-yellow-100 flex items-center justify-center shadow-[0_0_12px_rgba(254,240,138,0.55)]">
+              <div className="h-1.5 w-1.5 rounded-full bg-amber-300" />
               <AnimatePresence>
                 {flashActive && (
-                  <motion.div 
+                  <motion.div
                     initial={{ scale: 1, opacity: 1 }}
                     animate={{ scale: [1, 24, 48], opacity: [1, 0.9, 0] }}
                     exit={{ opacity: 0 }}
@@ -352,27 +374,56 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
               </AnimatePresence>
             </div>
           </div>
+
+          {/* LiDAR / Light Sensor */}
+          <div className="absolute bottom-5 right-5 h-6 w-6 rounded-full border border-[#26394a]/70 bg-[#314455] flex items-center justify-center shadow-[inset_0_1px_2px_rgba(0,0,0,0.55)] md:bottom-6 md:right-6 md:h-7 md:w-7">
+            <div className="h-3 w-3 rounded-full bg-[#172433] border border-black/40" />
+          </div>
         </div>
 
-        {/* Small LiDAR / Light Sensor */}
-        <div className="absolute top-15 left-18 w-2 h-2 rounded-full bg-zinc-950 border border-zinc-800" />
+        <AnimatePresence>
+          {flashActive && (
+            <motion.div
+              initial={{ scale: 0.2, opacity: 0 }}
+              animate={{ scale: [0.15, 2.5, 5.2], opacity: [0, 1, 0] }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.48, ease: "easeOut" }}
+              className="absolute left-[105px] top-[52px] h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white blur-[2px] shadow-[0_0_90px_45px_rgba(255,255,255,1),0_0_180px_95px_rgba(252,211,77,0.52)] pointer-events-none z-50 md:left-[118px] md:top-[58px]"
+            />
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {flashActive && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 0.5, 0] }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.32, ease: "easeOut" }}
+              className="absolute inset-0 bg-white pointer-events-none z-40"
+            />
+          )}
+        </AnimatePresence>
 
         {/* Apple/Branding Area (Center) */}
-        <div className="flex-grow flex flex-col items-center justify-center mt-12 gap-2 text-center">
+        <div className="relative flex-grow flex flex-col items-center justify-center mt-12 gap-2 text-center">
           <motion.div
             animate={flashActive ? { scale: [1, 1.1, 1] } : {}}
             transition={{ duration: 0.35 }}
-            className="text-4xl text-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.4)]"
+            className="text-4xl text-white/55 drop-shadow-[0_1px_2px_rgba(0,0,0,0.25)]"
           >
-            ⚡
+            <Image src="/iph.png" alt="iPhone logo" width={40} height={40} className="opacity-45" />
           </motion.div>
+          <div className="bg-gradient-to-r from-red-400 via-orange-300 to-white bg-clip-text text-sm font-black uppercase tracking-[3px] text-transparent drop-shadow-[0_0_16px_rgba(248,113,113,0.35)]">
+            Capture Your Moment
+          </div>
           <div className="text-[10px] font-black tracking-[4px] text-zinc-500 uppercase">
             FLASHOOT
           </div>
         </div>
 
         {/* Premium Matte Bottom Details */}
-        <div className="text-[7px] text-zinc-600 tracking-widest uppercase font-bold mt-auto mb-2 text-center">
+        <div className="relative text-[7px] text-[#526875] tracking-widest uppercase font-bold mt-auto mb-2 text-center">
           QUICK CONTENT ENGINE • 4K
         </div>
       </div>
