@@ -54,7 +54,7 @@ const plans = [
 
 export default function PricingSection() {
   return (
-    <section className="relative w-full max-w-7xl mx-auto px-4 py-14 pb-20 sm:px-6 sm:py-20 sm:pb-28 lg:py-24 lg:pb-32 z-10 selection:bg-amber-400/30">
+    <section className="relative  w-full max-w-7xl mx-auto px-4 py-14 pb-20 sm:px-6 mt-8 sm:py-20 sm:pb-28 lg:py-24 lg:pb-32 z-10 selection:bg-amber-400/30">
       
       {/* Glow Effect */}
       <div className="absolute bottom-12 right-1/4 hidden h-[250px] w-[500px] rounded-full bg-amber-400/8 blur-[100px] pointer-events-none sm:block" />

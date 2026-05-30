@@ -4,6 +4,7 @@ import { useState } from "react";
 import HeroSection from "./components/hero/HeroSection";
 import WorkFlowSection from "./components/sections/WorkFlowSection";
 import PricingSection from "./components/sections/PricingSection";
+import Footer from "./components/Footer";
 
 export default function HomePage() {
   const [screen, setScreen] = useState<"home" | "splash" | "instagram">("home");
@@ -37,6 +38,8 @@ export default function HomePage() {
         <div className="w-full">
           <PricingSection />
         </div>
+
+        <Footer />
       </div>
     </main>
   );

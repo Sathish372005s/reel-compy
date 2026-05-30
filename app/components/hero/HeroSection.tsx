@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import Link from "next/link";
 import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
 import PhoneMockup from "./Phonehero";
 
@@ -45,14 +44,15 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
 
     if (phoneBounds && navbar) {
       const navBounds = navbar.getBoundingClientRect();
-      const phoneIsCrossingHeader =
-        phoneBounds.top <= navBounds.bottom &&
-        phoneBounds.top >= navBounds.top + 12 &&
-        phoneBounds.bottom >= navBounds.top;
+      const phoneTouchesNavbar =
+        phoneBounds.left < navBounds.right &&
+        phoneBounds.right > navBounds.left &&
+        phoneBounds.top < navBounds.bottom &&
+        phoneBounds.bottom > navBounds.top;
 
       window.dispatchEvent(
         new CustomEvent("hero-phone-over-header", {
-          detail: { overHeader: phoneIsCrossingHeader },
+          detail: { overHeader: phoneTouchesNavbar },
         })
       );
     }
@@ -140,7 +140,7 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
                 font-semibold
               "
             >
-              WORLD&apos;S FIRST QUICK CONTENT SERVICE
+              INDIA&apos;S FIRST QUICK CONTENT SERVICE VIA DSLR
             </motion.span>
             {/* CTA BUTTONS: Book Now & Our Services */}
            
@@ -150,9 +150,9 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
               className="
                 max-w-4xl
                 text-[2rem]
-                sm:text-5xl
-                md:text-6xl
-                lg:text-7xl
+                sm:text-4xl
+                md:text-5xl
+                lg:text-6.7xl
                 font-black
                 uppercase
                 leading-[1.1]
@@ -160,11 +160,11 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
                 text-white
               "
             >
-              We Shoot • Edit • Deliver Reels in <br />
+              Shoot On Dslr • Edit On Mac • Deliver Reels in <br />
               <span
                 className="
                   text-[3rem]
-                  sm:text-7xl
+                  sm:text-3xl
                   md:text-8xl
                   lg:text-9xl
                   font-black
@@ -177,27 +177,11 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
                   tracking-tighter
                 "
               >
+                <div className="lg:h-[30px] w-auto"></div>
                 10 Minutes*
               </span>
             </motion.h1>
 
-            <motion.div
-              style={{ opacity: textOpacity, scale: textScale, y: textY }}
-              className="mt-6 flex w-full max-w-xs items-center justify-center gap-3 md:hidden"
-            >
-              <Link
-                href="/contact"
-                className="flex-1 rounded-full bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] px-4 py-3 text-center text-[10px] font-black uppercase tracking-wider text-black shadow-[0_8px_26px_rgba(245,158,11,0.24)] transition hover:from-[#b77912] hover:via-[#ffd36e] hover:to-[#fff6cf] sm:text-xs"
-              >
-                Book Now
-              </Link>
-              <Link
-                href="/services"
-                className="flex-1 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-center text-[10px] font-black uppercase tracking-wider text-white backdrop-blur-sm transition hover:bg-white/10 sm:text-xs"
-              >
-                Services
-              </Link>
-            </motion.div>
 
             
           </div>
@@ -205,8 +189,9 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
         </div>
 
         {/* Interactive Phone Mockup Container (z-50 guarantees it overlays the navbar header z-40) */}
-        <div ref={phoneRef} className="absolute inset-x-0 flex justify-center z-50 pointer-events-none select-none">
+        <div className="absolute inset-x-0 flex justify-center z-50 pointer-events-none select-none">
           <PhoneMockup
+            ref={phoneRef}
             className="pointer-events-auto origin-top"
             style={{
               y: phoneY,

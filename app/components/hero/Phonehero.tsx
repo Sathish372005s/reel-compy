@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { forwardRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { MotionStyle, MotionValue } from "framer-motion";
 
@@ -13,9 +14,13 @@ interface PhoneMockupProps {
   flashActive?: boolean;
 }
 
-export default function PhoneMockup({ className, style, screen, setScreen, rotateY = 0, flashActive = false }: PhoneMockupProps) {
+const PhoneMockup = forwardRef<HTMLDivElement, PhoneMockupProps>(function PhoneMockup(
+  { className, style, screen, setScreen, rotateY = 0, flashActive = false },
+  ref
+) {
   return (
     <motion.div
+      ref={ref}
       style={{
         ...style,
         rotateY: rotateY,
@@ -418,7 +423,7 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
             Capture Your Moment
           </div>
           <div className="text-[10px] font-black tracking-[4px] text-zinc-500 uppercase">
-            FLASHOOT
+            FLAReels
           </div>
         </div>
 
@@ -429,4 +434,6 @@ export default function PhoneMockup({ className, style, screen, setScreen, rotat
       </div>
     </motion.div>
   );
-}
+});
+
+export default PhoneMockup;

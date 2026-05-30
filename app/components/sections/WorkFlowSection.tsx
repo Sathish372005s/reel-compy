@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import ReelCameraRig from "./ReelCameraRig";
+import { motion } from "framer-motion";
+import Typewriter from "../Typewriting";
+
 
 const steps = [
   {
@@ -28,158 +28,28 @@ const steps = [
   },
 ];
 
-function DslrCamera({ flashActive, typewriterRun }: { flashActive: boolean; typewriterRun: number }) {
-  const [typedText, setTypedText] = useState("");
-
-  useEffect(() => {
-    if (typewriterRun === 0) {
-      return;
-    }
-
-    let cancelled = false;
-    const timers: number[] = [];
-    const wait = (duration: number) =>
-      new Promise<void>((resolve) => {
-        const timer = window.setTimeout(resolve, duration);
-        timers.push(timer);
-      });
-
-    const runTypewriter = async () => {
-      await wait(260);
-
-      const phrases = ["Capture your reel", "Edit", "Post it"];
-      setTypedText("");
-
-      for (const [phraseIndex, phrase] of phrases.entries()) {
-        for (let index = 1; index <= phrase.length; index++) {
-          if (cancelled) {
-            return;
-          }
-
-          setTypedText(phrase.slice(0, index));
-          await wait(58);
-        }
-
-        await wait(620);
-
-        if (phraseIndex === phrases.length - 1) {
-          return;
-        }
-
-        for (let index = phrase.length - 1; index >= 0; index--) {
-          if (cancelled) {
-            return;
-          }
-
-          setTypedText(phrase.slice(0, index));
-          await wait(34);
-        }
-
-        await wait(160);
-      }
-    };
-
-    void runTypewriter();
-
-    return () => {
-      cancelled = true;
-      timers.forEach((timer) => window.clearTimeout(timer));
-    };
-  }, [typewriterRun]);
-
+function DslrCamera() {
   return (
-    <div className="relative h-[430px] w-full max-w-[330px] sm:h-[620px] sm:max-w-[390px]">
+    <div className="relative  flex h-[300px] w-full max-w-[330px] sm:h-[500px] md: sm:max-w-[390px]  items-center justify-center ">
       <div className="absolute inset-x-8 bottom-12 h-14 rounded-full bg-black/60 blur-2xl sm:bottom-16" />
 
       <motion.div
-        animate={flashActive ? { y: [0, -4, 0], scale: [1, 1.015, 1] } : {}}
-        transition={{ duration: 0.42, ease: "easeOut" }}
+        animate={{ y: [0, -4, 0] }}
+        transition={{ duration: 4, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
         className="absolute left-1/2 top-[47%] h-full w-full -translate-x-1/2 -translate-y-1/2"
       >
-        <ReelCameraRig />
-
-        {/* Real-image flash target */}
-        <div className="absolute left-[45%] top-[17%] h-8 w-16 -translate-x-1/2 rounded-full bg-yellow-100/30 blur-sm sm:h-10 sm:w-20" />
-        <div className="absolute left-[45%] top-[17%] h-5 w-10 -translate-x-1/2 rounded-md bg-yellow-50/80 shadow-[0_0_20px_rgba(254,240,138,0.5)] sm:h-6 sm:w-12">
-        </div>
-
-        <AnimatePresence>
-          {flashActive && (
-            <>
-              <motion.div
-                initial={{ scale: 0.15, opacity: 0 }}
-                animate={{ scale: [0.15, 2.2, 4.8], opacity: [0, 1, 0] }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="absolute left-[45%] top-[17%] h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white blur-[2px] shadow-[0_0_90px_45px_rgba(255,255,255,1),0_0_180px_95px_rgba(252,211,77,0.55)] pointer-events-none z-30"
-              />
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 0.42, 0] }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.32, ease: "easeOut" }}
-                className="fixed inset-0 bg-white pointer-events-none z-20"
-              />
-            </>
-          )}
-        </AnimatePresence>
+        <img
+          src="/reel-camera.png"
+          alt="DSLR Camera"
+          className="h-[350px] w-auto object-contain drop-shadow-2xl justify-center mx-auto items-center"
+        />
+        <Typewriter />
       </motion.div>
-
-      <div className="absolute bottom-0 left-1/2 flex h-14 w-full -translate-x-1/2 items-center justify-center text-center sm:bottom-2">
-        <div className="min-w-[220px] rounded-full border border-amber-300/20 bg-black/40 px-4 py-2 backdrop-blur-sm sm:min-w-[250px] sm:px-5">
-          <span className="bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-white bg-clip-text font-mono text-lg font-black uppercase tracking-[2px] text-transparent drop-shadow-[0_0_18px_rgba(245,158,11,0.38)] sm:text-2xl">
-          {typedText}
-          </span>
-          <motion.span
-            animate={{ opacity: [1, 0, 1] }}
-            transition={{ repeat: Infinity, duration: 0.9, ease: "linear" }}
-            className="ml-1 inline-block h-6 w-[3px] translate-y-1 rounded-full bg-amber-200 shadow-[0_0_12px_rgba(251,191,36,0.9)] sm:h-7"
-          />
-        </div>
-      </div>
     </div>
   );
 }
 
 export default function WorkFlowSection() {
-  const flashStartTimerRef = useRef<number | null>(null);
-  const flashEndTimerRef = useRef<number | null>(null);
-  const [flashActive, setFlashActive] = useState(false);
-  const [typewriterRun, setTypewriterRun] = useState(0);
-
-  useEffect(() => {
-    return () => {
-      if (flashStartTimerRef.current) {
-        window.clearTimeout(flashStartTimerRef.current);
-      }
-
-      if (flashEndTimerRef.current) {
-        window.clearTimeout(flashEndTimerRef.current);
-      }
-    };
-  }, []);
-
-  const triggerFlash = () => {
-    if (flashStartTimerRef.current) {
-      window.clearTimeout(flashStartTimerRef.current);
-    }
-
-    if (flashEndTimerRef.current) {
-      window.clearTimeout(flashEndTimerRef.current);
-    }
-
-    setFlashActive(false);
-    setTypewriterRun((run) => run + 1);
-
-    flashStartTimerRef.current = window.setTimeout(() => {
-      setFlashActive(true);
-    }, 40);
-
-    flashEndTimerRef.current = window.setTimeout(() => {
-      setFlashActive(false);
-    }, 460);
-  };
-
   return (
     
     <section className="relative w-full max-w-7xl mx-auto px-4 pt-8 pb-14 sm:px-6 sm:py-20 lg:py-24 z-10 selection:bg-amber-400/30">
@@ -263,12 +133,10 @@ export default function WorkFlowSection() {
           initial={{ opacity: 0, x: 80, rotate: 4 }}
           whileInView={{ opacity: 1, x: 0, rotate: 0 }}
           viewport={{ once: false, amount: 0.35 }}
-          onViewportEnter={triggerFlash}
-          onClick={triggerFlash}
           transition={{ type: "spring", stiffness: 70, damping: 18 }}
-          className="lg:col-span-5 flex justify-center lg:justify-end z-20 cursor-pointer select-none"
+          className="lg:col-span-5 flex justify-center lg:justify-end z-20 select-none"
         >
-          <DslrCamera flashActive={flashActive} typewriterRun={typewriterRun} />
+          <DslrCamera />
         </motion.div>
       </div>
     </section>

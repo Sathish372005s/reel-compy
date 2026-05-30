@@ -8,8 +8,7 @@ interface ThemedRoutePageProps {
   title: string;
   accent: string;
   description: string;
-  items: string[];
-  cta?: string;
+  
 }
 
 export default function ThemedRoutePage({
@@ -17,8 +16,7 @@ export default function ThemedRoutePage({
   title,
   accent,
   description,
-  items,
-  cta = "Book Now",
+ 
 }: ThemedRoutePageProps) {
   return (
     <main className="relative min-h-screen px-4 pb-16 pt-28 text-white selection:bg-amber-400/30 sm:px-6 sm:pb-24 sm:pt-36">
@@ -56,25 +54,7 @@ export default function ThemedRoutePage({
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3">
-          {items.map((item, index) => (
-            <motion.div
-              key={item}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.12 + index * 0.08 }}
-              className="group relative overflow-hidden rounded-2xl border border-white/5 bg-zinc-950/40 p-5 shadow-xl backdrop-blur-xl sm:rounded-3xl sm:p-6"
-            >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(251,191,36,0.1),transparent_45%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="relative text-3xl font-black text-amber-300/70">
-                {String(index + 1).padStart(2, "0")}
-              </div>
-              <p className="relative mt-6 text-sm font-bold uppercase tracking-wide text-white">
-                {item}
-              </p>
-            </motion.div>
-          ))}
-        </div>
+       
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -82,12 +62,7 @@ export default function ThemedRoutePage({
           transition={{ delay: 0.34 }}
           className="flex flex-wrap gap-3"
         >
-          <Link
-            href="/contact"
-            className="rounded-full bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] px-6 py-3 text-xs font-black uppercase tracking-wider text-black shadow-[0_8px_26px_rgba(245,158,11,0.22)]"
-          >
-            {cta}
-          </Link>
+          
           <Link
             href="/"
             className="rounded-full border border-white/10 bg-white/5 px-6 py-3 text-xs font-black uppercase tracking-wider text-white"
