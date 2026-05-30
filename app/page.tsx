@@ -16,7 +16,7 @@ export default function HomePage() {
         Hero Section containing the scrollable phone mockup.
         Updates screen state to trigger unlocking elements below.
       */}
-      <div className="relative z-10 w-full">
+      <div className="relative z-10 mt-5 w-full">
         <HeroSection screen={screen} setScreen={setScreen} />
       </div>
 
@@ -27,7 +27,7 @@ export default function HomePage() {
       */}
       <div
         className={`relative z-10 transition-all duration-1000 ease-in-out origin-top ${screen === "instagram"
-            ? "opacity-100 max-h-[5000px] pointer-events-auto filter blur-none -mt-32 sm:mt-0"
+            ? "opacity-100 max-h-[5000px] pointer-events-auto filter blur-none -mt-8 sm:mt-0"
             : "opacity-0 max-h-0 overflow-hidden pointer-events-none filter blur-md"
           }`}
       >
