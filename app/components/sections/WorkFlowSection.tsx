@@ -52,7 +52,7 @@ function DslrCamera() {
 export default function WorkFlowSection() {
   return (
     
-    <section className="relative w-full max-w-7xl mx-auto px-4 pt-8 pb-14 sm:px-6 sm:py-20 lg:py-24 z-10 selection:bg-amber-400/30">
+    <section className="relative w-full max-w-7xl mx-auto px-4 pt-0 pb-14 sm:px-6 sm:py-20 lg:py-24 z-10 selection:bg-amber-400/30">
       
       {/* Dynamic Background Glow */}
       <div className="absolute top-1/2 left-1/2 hidden h-[300px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-500/10 blur-[120px] pointer-events-none sm:block" />

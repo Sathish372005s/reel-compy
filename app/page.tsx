@@ -28,8 +28,8 @@ export default function HomePage() {
       */}
       <div
         className={`relative z-10 transition-all duration-1000 ease-in-out origin-top ${screen === "instagram"
-            ? "opacity-100 max-h-[6000px] pointer-events-auto filter blur-none -mt-20 sm:mt-0"
-            : "opacity-0 max-h-0 overflow-hidden pointer-events-none filter blur-md"
+            ? "opacity-100 max-h-[6000px] pointer-events-auto filter blur-none -mt-36 sm:mt-0"
+            : "opacity-100 max-h-[6000px] pointer-events-auto filter blur-none -mt-36 sm:opacity-0 sm:max-h-0 sm:overflow-hidden sm:pointer-events-none sm:filter sm:blur-md sm:mt-0"
           }`}
       >
         <div className="w-full">

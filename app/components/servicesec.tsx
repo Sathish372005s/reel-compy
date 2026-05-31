@@ -11,73 +11,85 @@ const services = [
     title: "Pre-Wedding",
     description: "Beautiful cinematic love stories captured before your big day.",
     icon: Heart,
-    badge: "Cinema"
+    badge: "Cinema",
+    video:""
   },
   {
     title: "Post Wedding",
     description: "Create timeless memories after the wedding celebrations.",
     icon: Sparkles,
-    badge: "Memories"
+    badge: "Memories",
+    video:""
   },
   {
     title: "Engagement",
     description: "Capture every smile and special moment of your engagement.",
     icon: Camera,
-    badge: "Shoot"
+    badge: "Shoot",
+    video:""
   },
   {
     title: "Haldi",
     description: "Vibrant and joyful Haldi ceremony coverage with cinematic storytelling.",
     icon: Star,
-    badge: "Vibrant"
+    badge: "Vibrant",
+    video:""
   },
   {
     title: "Sangeet",
     description: "High-energy coverage of dance, music, and unforgettable moments.",
     icon: Film,
-    badge: "Energy"
+    badge: "Energy",
+    video:""
   },
   {
     title: "Wedding",
     description: "Complete wedding photography and videography with cinematic edits.",
     icon: Heart,
-    badge: "Elite"
+    badge: "Elite",
+    video:""
   },
   {
     title: "Reception",
     description: "Elegant reception coverage highlighting every memorable detail.",
     icon: Sparkles,
-    badge: "Elegant"
+    badge: "Elegant",
+    video:""
   },
   {
     title: "Birthday",
     description: "Capture celebrations, laughter, and memories that last forever.",
     icon: User,
-    badge: "Events"
+    badge: "Events",
+    video:""
   },
   {
     title: "Business",
     description: "Professional corporate photography and video production services.",
     icon: Briefcase,
-    badge: "Corporate"
+    badge: "Corporate",
+    video:""
   },
   {
     title: "Brand Events",
     description: "Showcase your brand through premium event coverage and content.",
     icon: Briefcase,
-    badge: "Marketing"
+    badge: "Marketing",
+    video:""
   },
   {
     title: "Content Creators",
     description: "High-quality reels, shorts, and creator-focused visual content.",
     icon: Film,
-    badge: "Social"
+    badge: "Social",
+    video:""
   },
   {
     title: "Others",
     description: "Customized photography and videography solutions for any occasion.",
     icon: Star,
-    badge: "Custom"
+    badge: "Custom",
+    video:""
   },
 ];
 
@@ -133,10 +145,10 @@ export default function ServicesSection() {
                   overflow-hidden
                   rounded-3xl
                   border border-amber-300/10
-                  bg-zinc-950/50
+                  bg-zinc-950/40
                   backdrop-blur-xl
                   p-6 sm:p-7
-                  min-h-[220px]
+                  min-h-[350px] sm:min-h-[420px]
                   cursor-pointer
                   transition-all
                   duration-300
@@ -145,19 +157,32 @@ export default function ServicesSection() {
                   hover:shadow-[0_0_30px_rgba(245,158,11,0.06)]
                 "
               >
+                {/* Loop-playing Reel Video Background */}
+                <video
+                  src={service.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700 z-0"
+                />
+
+                {/* Dark Vignette Overlay for Text Readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-black/10 z-0" />
+
                 {/* Monogram / Icon Header */}
-                <div className="flex items-center justify-between mb-4">
+                <div className="relative z-10 flex items-center justify-between mb-4">
                   <div className="w-10 h-10 rounded-xl border border-amber-300/20 bg-amber-500/5 flex items-center justify-center text-amber-300 transition-colors duration-300 group-hover:bg-amber-400 group-hover:text-black">
                     <IconComponent className="h-5 w-5" />
                   </div>
-                  <span className="text-[9px] font-mono tracking-widest text-zinc-500 uppercase">
+                  <span className="text-[9px] font-mono tracking-widest text-zinc-400 uppercase">
                     {service.badge}
                   </span>
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 flex flex-col justify-end mt-4">
-                  <h3 className="text-lg sm:text-xl font-extrabold text-white group-hover:text-amber-200 transition-colors duration-300 tracking-wide">
+                <div className="relative z-10 flex-1 flex flex-col justify-end mt-4">
+                  <h3 className="text-lg sm:text-xl font-black text-white group-hover:text-amber-200 transition-colors duration-300 tracking-wide uppercase">
                     {service.title}
                   </h3>
 
@@ -167,8 +192,8 @@ export default function ServicesSection() {
                 </div>
 
                 {/* Corner Arrow Indicator */}
-                <div className="absolute bottom-5 right-5 opacity-40 group-hover:opacity-100 transition-opacity duration-300">
-                  <ArrowUpRight className="h-4 w-4 text-zinc-500 group-hover:text-amber-300 transition-colors duration-300" />
+                <div className="absolute bottom-5 right-5 z-10 opacity-50 group-hover:opacity-100 transition-opacity duration-300">
+                  <ArrowUpRight className="h-4 w-4 text-zinc-400 group-hover:text-amber-300 transition-colors duration-300" />
                 </div>
               </Link>
             );

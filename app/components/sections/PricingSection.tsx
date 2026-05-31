@@ -55,7 +55,7 @@ const weddingPlans = [
       "3 Edited Reels",
       "Shot on DSLR (Sony)",
       "Instant Reel Delivery",
-      "SD Card/Pendrive raw content delivery",
+      " please provide on all the pricing list before sd card",
       "Flareels logo Mandatory",
     ],
     badge: "Single Event",
@@ -98,7 +98,7 @@ const weddingPlans = [
   {
     name: "Premium Pro",
     subtitle: "Complete Wedding",
-    price: "₹2,99,999",
+    price: "₹99,999",
     period: "full wedding",
     description: "The complete wedding experience with exclusive Cinematic addons & Signature Elegance.",
     features: [
@@ -110,6 +110,31 @@ const weddingPlans = [
       "No Watermark / Non-Mandatory",
     ],
     badge: "Complete Wedding",
+    isPopular: false,
+  },
+];
+
+const businessPlans = [
+  {
+    name: "Business & Brands",
+    subtitle: "Customized Package",
+    price: "Custom Pricing",
+    period: "package",
+    description:
+      "Built for businesses looking to showcase products, services, and brand identity with cinematic DSLR visuals and high-impact content.",
+    features: [
+      "Professional DSLR Coverage",
+      "Brand Storytelling Reels",
+      "Product & Service Showcase",
+      "Cinematic Color Grading",
+      "Business Interview Clips",
+      "Professional Editing on Mac",
+      "Team & Workplace Highlights",
+      "Social Media Ready Reels",
+      "Fast Delivery",
+      "Raw Footage Available on Request",
+    ],
+    badge: "Customized Pricing",
     isPopular: false,
   },
 ];
@@ -132,6 +157,15 @@ export default function PricingSection() {
             : "border-white/5 bg-zinc-950/30 backdrop-blur-xl z-10"
         }`}
       >
+        <div className="z-40">
+          <img
+            src="logo.png"
+            alt="logo"
+            width={120}
+            height={120}
+            className="rounded-2xl"
+          />
+        </div>
         {plan.isPopular && (
           <div className="absolute inset-0 bg-amber-400/8 blur-xl -z-10 rounded-[28px] pointer-events-none" />
         )}
@@ -214,14 +248,7 @@ export default function PricingSection() {
 
       {/* Main Headers */}
       <div className="text-center mb-10 sm:mb-16">
-        <motion.span 
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="border border-amber-300/25 bg-amber-300/10 px-4 py-1.5 text-[10px] sm:text-xs uppercase tracking-[4px] text-amber-200 rounded-full font-semibold"
-        >
-          INVESTMENT PLANS
-        </motion.span>
+        
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -298,6 +325,7 @@ export default function PricingSection() {
               className="grid grid-cols-1 gap-6"
             >
               {weddingPlans.map((plan, idx) => renderCard(plan, idx))}
+              {businessPlans.map((plan, idx) => renderCard(plan, weddingPlans.length + idx))}
             </motion.div>
           )}
         </AnimatePresence>
@@ -331,6 +359,12 @@ export default function PricingSection() {
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {weddingPlans.map((plan, idx) => renderCard(plan, idx))}
+          </div>
+
+          <div className="mt-8 flex justify-center">
+            <div className="w-full max-w-md">
+              {businessPlans.map((plan, idx) => renderCard(plan, weddingPlans.length + idx))}
+            </div>
           </div>
         </div>
 

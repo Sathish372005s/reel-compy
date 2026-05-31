@@ -120,7 +120,7 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 639px)");
     const syncCameraStart = () => {
-      setCameraStartY(mediaQuery.matches ? "50vh" : "72vh");
+      setCameraStartY(mediaQuery.matches ? "0vh" : "72vh");
     };
 
     syncCameraStart();
@@ -161,11 +161,11 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
       ref={containerRef} 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative h-[125vh] w-full selection:bg-amber-400/30 sm:h-[155vh] lg:h-[170vh]"
+      className="relative h-[100svh] w-full selection:bg-amber-400/30 sm:h-[155vh] lg:h-[170vh]"
     >
       
       {/* Sticky Inner Viewport */}
-      <div className="sticky top-0 h-[100svh] w-full overflow-hidden flex flex-col justify-between perspective-[1200px] sm:h-screen">
+      <div className="relative h-[100svh] w-full overflow-hidden flex flex-col justify-between perspective-[1200px] sm:sticky sm:top-0 sm:h-screen">
         {/* Dynamic Foreground Content */}
         <div className="relative  z-10 flex flex-col h-full w-full justify-between pb-0">
 
@@ -279,7 +279,7 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
         </div>
 
         {/* Interactive Camera Mockup Container (z-50 guarantees it overlays the navbar header z-40) */}
-        <div className="absolute inset-x-0 top-[15vh] sm:top-0 sm:m-auto flex justify-center z-50 pointer-events-none select-none">
+        <div className="absolute inset-x-0 top-[35vh] sm:top-0 sm:m-auto flex justify-center z-50 pointer-events-none select-none">
           <CameraMockup
             ref={cameraRef}
             className="pointer-events-auto origin-top sm:mt-20"

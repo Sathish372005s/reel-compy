@@ -7,6 +7,8 @@ type ContactPayload = {
   name?: unknown;
   email?: unknown;
   phone?: unknown;
+  serviceType?: unknown;
+  plan?: unknown;
   message?: unknown;
 };
 
@@ -30,9 +32,11 @@ export async function POST(req: Request) {
     const name = sanitize(payload.name);
     const email = sanitize(payload.email).toLowerCase();
     const phone = sanitize(payload.phone);
+    const serviceType = sanitize(payload.serviceType);
+    const plan = sanitize(payload.plan);
     const message = sanitize(payload.message);
 
-    if (!name || !email || !phone || !message) {
+    if (!name || !email || !phone || !serviceType || !plan || !message) {
       return NextResponse.json(
         {
           error: "Missing required fields. Please complete all form inputs.",
@@ -80,6 +84,8 @@ export async function POST(req: Request) {
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
     const safePhone = escapeHtml(phone);
+    const safeServiceType = escapeHtml(serviceType);
+    const safePlan = escapeHtml(plan);
     const safeMessage = escapeHtml(message);
 
     const htmlContent = `
@@ -235,6 +241,14 @@ export async function POST(req: Request) {
                 <td class="label">Phone Number</td>
                 <td class="value"><a href="tel:${safePhone}">${safePhone}</a></td>
               </tr>
+              <tr>
+                <td class="label">Service Type</td>
+                <td class="value">${safeServiceType}</td>
+              </tr>
+              <tr>
+                <td class="label">Selected Plan</td>
+                <td class="value">${safePlan}</td>
+              </tr>
             </table>
 
             <div class="message-title">Project Details</div>
@@ -282,6 +296,8 @@ export async function POST(req: Request) {
         `Name: ${name}`,
         `Email: ${email}`,
         `Phone: ${phone}`,
+        `Service Type: ${serviceType}`,
+        `Plan: ${plan}`,
         "",
         message,
       ].join("\n"),

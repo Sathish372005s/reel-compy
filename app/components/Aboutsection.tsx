@@ -160,7 +160,7 @@ export default function AboutSection() {
           </h3>
 
           <p className="mt-3 text-gray-400">
-            Let's create reels, videos, and visuals that
+            Let&apos;s create reels, videos, and visuals that
             stand out from the crowd.
           </p>
 

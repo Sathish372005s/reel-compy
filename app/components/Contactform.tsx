@@ -4,11 +4,36 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Calendar, ArrowUpRight } from "lucide-react";
 
+const servicePlans = {
+  reel: {
+    label: "Professional Reel Packages",
+    plans: [
+      { name: "Creator Launch", price: "Rs. 4,999" },
+      { name: "Creator Pro", price: "Rs. 7,999" },
+    ],
+  },
+  wedding: {
+    label: "Wedding Packages",
+    plans: [
+      { name: "Basic", price: "Rs. 14,999" },
+      { name: "Pro", price: "Rs. 44,999" },
+      { name: "Premium", price: "Rs. 59,999" },
+      { name: "Premium Pro", price: "Rs. 99,999" },
+    ],
+  },
+  business: {
+    label: "Business & Brands Package",
+    plans: [{ name: "Customized Pricing", price: "Custom Pricing" }],
+  },
+};
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
+    serviceType: "",
+    plan: "",
     message: "",
   });
 
@@ -20,12 +45,15 @@ export default function ContactForm() {
 
   const handleChange = (
     e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
+    const { name, value } = e.target;
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
+      ...(name === "serviceType" ? { plan: "" } : {}),
     });
   };
 
@@ -48,6 +76,11 @@ export default function ContactForm() {
           name: formData.name,
           email: formData.email,
           phone: `+91${formData.phone}`,
+          serviceType:
+            servicePlans[
+              formData.serviceType as keyof typeof servicePlans
+            ]?.label || formData.serviceType,
+          plan: formData.plan,
           message: formData.message,
         }),
       });
@@ -68,6 +101,8 @@ export default function ContactForm() {
         name: "",
         email: "",
         phone: "",
+        serviceType: "",
+        plan: "",
         message: "",
       });
     } catch (err: unknown) {
@@ -267,6 +302,83 @@ export default function ContactForm() {
                   focus:border-yellow-400
                 "
               />
+            </div>
+          </div>
+
+          {/* Service Type + Plan */}
+          <div className="mt-5 md:mt-6 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+            <div>
+              <label className="block text-sm text-yellow-400 mb-2">
+                Service Type
+              </label>
+
+              <select
+                name="serviceType"
+                value={formData.serviceType}
+                onChange={handleChange}
+                required
+                className="
+                  w-full
+                  rounded-xl
+                  border border-yellow-500/20
+                  bg-black/50
+                  px-4 py-3
+                  text-white
+                  outline-none
+                  focus:border-yellow-400
+                "
+              >
+                <option value="" className="bg-black">
+                  Select service type
+                </option>
+                {Object.entries(servicePlans).map(([value, service]) => (
+                  <option key={value} value={value} className="bg-black">
+                    {service.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-sm text-yellow-400 mb-2">
+                Plan
+              </label>
+
+              <select
+                name="plan"
+                value={formData.plan}
+                onChange={handleChange}
+                required
+                disabled={!formData.serviceType}
+                className="
+                  w-full
+                  rounded-xl
+                  border border-yellow-500/20
+                  bg-black/50
+                  px-4 py-3
+                  text-white
+                  outline-none
+                  focus:border-yellow-400
+                  disabled:cursor-not-allowed
+                  disabled:opacity-60
+                "
+              >
+                <option value="" className="bg-black">
+                  Select plan
+                </option>
+                {formData.serviceType &&
+                  servicePlans[
+                    formData.serviceType as keyof typeof servicePlans
+                  ].plans.map((plan) => (
+                    <option
+                      key={plan.name}
+                      value={`${plan.name} - ${plan.price}`}
+                      className="bg-black"
+                    >
+                      {plan.name} - {plan.price}
+                    </option>
+                  ))}
+              </select>
             </div>
           </div>
 

@@ -36,7 +36,7 @@ export default function Footer() {
           {/* Logo Section */}
           <div>
             <Image
-              src="/logo-without-bg.png" // replace with your logo
+              src="/logo.png" // replace with your logo
               alt="FLA Reels"
               width={180}
               height={60}
@@ -53,7 +53,7 @@ export default function Footer() {
             <div className="flex gap-4 mt-6">
               {[
                 { Icon: FaInstagram, href: "https://www.instagram.com/weareflareels?igsh=NHU5MGFyajg5NTl6&utm_source=qr" },
-                { Icon: FaFacebookF, href: "#" },
+                { Icon: FaFacebookF, href: "https://www.facebook.com/share/1D8755KexM/?mibextid=wwXIfr" },
                 { Icon: FaYoutube, href: "#" },
                 { Icon: FaWhatsapp, href: "https://wa.me/919866695553" },
               ].map(({ Icon, href }, index) => (
