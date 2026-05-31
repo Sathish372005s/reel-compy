@@ -32,7 +32,7 @@ export default function ContactForm() {
     };
 
     return (
-        <section className="relative py-20 px-5">
+        <section className="relative pt-4 pb-20 px-5 max-sm:pt-2">
             <div className="max-w-3xl mx-auto">
                 {/* Heading */}
                 <div className="text-center mb-12">

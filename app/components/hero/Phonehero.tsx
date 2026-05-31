@@ -25,7 +25,7 @@ const CameraMockup = forwardRef<HTMLDivElement, CameraMockupProps>(function Came
         ...style,
         transformStyle: "preserve-3d",
       }}
-      className={`relative flex h-[45vh] min-h-[320px] sm:h-[75vh] sm:min-h-[440px] w-screen items-center justify-center px-4 sm:px-8 lg:px-12 select-none pointer-events-none ${className || ""}`}
+      className={`relative flex h-[38vh] min-h-[280px] sm:h-[75vh] sm:min-h-[440px] w-screen items-center justify-center px-4 sm:px-8 lg:px-12 select-none pointer-events-none ${className || ""}`}
     >
       {/* Main 3D DSLR Camera Wrapper */}
       <motion.div
@@ -91,9 +91,9 @@ const CameraMockup = forwardRef<HTMLDivElement, CameraMockupProps>(function Came
         </motion.div>
 
         {/* Mobile-Only Responsive Flanking Texts (positioned directly below the camera on mobile) */}
-        {/* Adjusted spacing (mt-[-95px]) to snugly group directly beneath Ronin handle */}
+        {/* Adjusted spacing to snugly group directly beneath Ronin handle */}
         <div 
-          className={`mt-[-95px] sm:hidden flex items-center justify-center gap-6 px-4 pointer-events-none select-none z-30 transition-all duration-500 ${
+          className={`mt-[-80px] sm:hidden flex items-center justify-center gap-6 px-4 pointer-events-none select-none z-30 transition-all duration-500 ${
             screen === "instagram" ? "opacity-0 scale-95 pointer-events-none" : "opacity-100"
           }`}
           style={{ transform: "translateZ(20px)" }}

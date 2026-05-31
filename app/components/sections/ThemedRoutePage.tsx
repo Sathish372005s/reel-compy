@@ -8,7 +8,6 @@ interface ThemedRoutePageProps {
   title: string;
   accent: string;
   description: string;
-  items?: string[];
 }
 
 export default function ThemedRoutePage({
@@ -16,14 +15,13 @@ export default function ThemedRoutePage({
   title,
   accent,
   description,
-  items = [],
 }: ThemedRoutePageProps) {
   return (
-    <main className="relative min-h-screen px-4 pb-16 pt-28 text-white selection:bg-amber-400/30 sm:px-6 sm:pb-24 sm:pt-36">
+    <main className="relative min-h-fit px-4 pb-8 pt-28 text-white selection:bg-amber-400/30 sm:px-6 sm:pb-16 sm:pt-36">
       <div className="absolute left-1/2 top-28 hidden h-72 w-[640px] -translate-x-1/2 rounded-full bg-amber-500/10 blur-[120px] pointer-events-none sm:block sm:top-36" />
 
       <section className="relative z-10 mx-auto flex max-w-6xl flex-col gap-8 sm:gap-12">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl flex flex-col items-center text-center sm:items-start sm:text-left mt-8 sm:mt-0">
           <motion.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -54,33 +52,11 @@ export default function ThemedRoutePage({
           </motion.p>
         </div>
 
-        {items.length > 0 && (
-          <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3">
-            {items.map((item, index) => (
-              <motion.div
-                key={item}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.12 + index * 0.08 }}
-                className="group relative overflow-hidden rounded-2xl border border-white/5 bg-zinc-950/40 p-5 shadow-xl backdrop-blur-xl sm:rounded-3xl sm:p-6"
-              >
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(251,191,36,0.1),transparent_45%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                <div className="relative text-3xl font-black text-amber-300/70">
-                  {String(index + 1).padStart(2, "0")}
-                </div>
-                <p className="relative mt-6 text-sm font-bold uppercase tracking-wide text-white">
-                  {item}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        )}
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.34 }}
-          className="flex flex-wrap gap-3"
+          className="flex flex-wrap gap-3 justify-center sm:justify-start"
         >
           
           <Link
