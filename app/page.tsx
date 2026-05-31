@@ -4,6 +4,7 @@ import { useState } from "react";
 import HeroSection from "./components/hero/HeroSection";
 import WorkFlowSection from "./components/sections/WorkFlowSection";
 import PricingSection from "./components/sections/PricingSection";
+import BookingCta from "./components/BookingCta";
 import Footer from "./components/Footer";
 
 export default function HomePage() {
@@ -27,7 +28,7 @@ export default function HomePage() {
       */}
       <div
         className={`relative z-10 transition-all duration-1000 ease-in-out origin-top ${screen === "instagram"
-            ? "opacity-100 max-h-[5000px] pointer-events-auto filter blur-none -mt-20 sm:mt-0"
+            ? "opacity-100 max-h-[6000px] pointer-events-auto filter blur-none -mt-20 sm:mt-0"
             : "opacity-0 max-h-0 overflow-hidden pointer-events-none filter blur-md"
           }`}
       >
@@ -37,6 +38,10 @@ export default function HomePage() {
 
         <div className="w-full">
           <PricingSection />
+        </div>
+
+        <div className="w-full">
+          <BookingCta />
         </div>
 
         <Footer />

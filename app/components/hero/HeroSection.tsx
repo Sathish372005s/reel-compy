@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent, useMotionValue, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent, useMotionValue } from "framer-motion";
 import CameraMockup from "./Phonehero";
 
 interface HeroSectionProps {
@@ -13,7 +13,6 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const cameraRef = useRef<HTMLDivElement>(null);
   const [cameraStartY, setCameraStartY] = useState("72vh");
-  const [flashActive, setFlashActive] = useState(false);
 
   // Mouse tilt tracking values
   const mouseX = useMotionValue(0);
@@ -148,16 +147,10 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
 
   useEffect(() => {
     if (screen === "splash") {
-      setFlashActive(true);
-      const flashTimer = setTimeout(() => {
-        setFlashActive(false);
-      }, 700);
-
       const timer = setTimeout(() => {
         setScreen("instagram");
-      }, 900);
+      }, 120);
       return () => {
-        clearTimeout(flashTimer);
         clearTimeout(timer);
       };
     }
@@ -299,37 +292,10 @@ export default function HeroSection({ screen, setScreen }: HeroSectionProps) {
             }}
             screen={screen}
             setScreen={setScreen}
-            flashActive={flashActive}
           />
         </div>
 
       </div>
-
-      {/* Screen-Wide DSLR Studio Flash Overlay */}
-      <AnimatePresence>
-        {flashActive && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1, 1, 0] }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, times: [0, 0.1, 0.35, 1], ease: "easeOut" }}
-            className="fixed inset-0 z-[9999] pointer-events-none bg-white flex items-center justify-center"
-          >
-            {/* Soft high-fidelity lens flare glow */}
-            <div className="absolute w-[80vw] h-[80vw] bg-amber-100 rounded-full filter blur-[150px] opacity-45 mix-blend-screen" />
-            
-            {/* Shutter Blade Graphic Effect */}
-            <motion.div 
-              initial={{ scale: 2 }}
-              animate={{ scale: [2, 0.8, 2] }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="w-48 h-48 border-[12px] border-zinc-800/40 rounded-full flex items-center justify-center opacity-10"
-            >
-              <div className="w-36 h-36 border-[6px] border-zinc-700/30 rounded-full" />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

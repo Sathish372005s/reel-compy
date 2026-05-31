@@ -129,7 +129,7 @@ export default function Navbar() {
             <Aperture className="h-5 w-5 shrink-0 text-amber-300 drop-shadow-[0_0_16px_rgba(251,191,36,0.55)] transition-transform duration-500 group-hover:rotate-180 sm:h-6 sm:w-6" />
 
             <Image
-              src="/logo-without-bg.png"
+              src="/logo.png"
               alt="Company Logo"
               width={777}
               height={328}

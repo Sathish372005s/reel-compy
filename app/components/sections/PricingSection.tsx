@@ -1,72 +1,226 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { Sparkles, Check, PhoneCall, Calendar } from "lucide-react";
 
-const plans = [
+const reelPlans = [
   {
-    name: "Starter Creator",
-    price: "₹14,999",
-    period: "month",
-    description: "Perfect for personal brands & individual creators looking to dominate reels.",
+    name: "Creator Launch",
+    subtitle: "Hourly Plan",
+    price: "₹4,999",
+    period: "shoot",
+    description: "2-hour professional DSLR creator package to launch your social feed.",
     features: [
-      "5 custom-edited Reels per month",
-      "1 On-location shoot (up to 2 hours)",
-      "Standard 10-Minute Delivery pipeline",
-      "Dynamic captions & trendy soundtracks",
-      "1 Revision per video",
+      "2 hour professional DSLR shoot",
+      "1 Cinematic Edited Reel",
+      "Professional Color Grading",
+      "Fast Delivery within 10 mins",
+      "Best Reel Creators",
+      "Flareels Branding Included",
     ],
-    badge: "Solo",
+    badge: "Hourly Plan",
     isPopular: false,
   },
   {
-    name: "Growth Brand",
-    price: "₹39,999",
-    period: "month",
-    description: "Specially designed for growing startups, agencies, and e-commerce brands.",
+    name: "Creator Pro",
+    subtitle: "Half-Day Plan",
+    price: "₹7,999",
+    period: "shoot",
+    description: "4-hour professional DSLR shoot, content planning, and rapid editing.",
     features: [
-      "15 custom-edited Reels per month",
-      "2 On-location shoots (up to 4 hours total)",
-      "Priority 10-Minute Delivery pipeline",
-      "A/B Hook testing & advanced editing",
-      "Unlimited revisions",
-      "Native scripting & hooks strategy",
+      "4 hours professional DSLR shoot",
+      "2 Cinematic Edited Reels",
+      "Professional Color Grading",
+      "Fast Delivery within 10 mins",
+      "Content Planning Assistance",
+      "Best Reel Creators",
+      "Flareels Branding Included",
     ],
-    badge: "Best Value",
+    badge: "Creator Pro",
+    isPopular: true,
+  },
+];
+
+const weddingPlans = [
+  {
+    name: "Basic",
+    subtitle: "Single Event",
+    price: "₹14,999",
+    period: "event",
+    description: "Clean DSLR memories crafted beautifully within your budget.",
+    features: [
+      "Covers one event",
+      "3 Edited Reels",
+      "Shot on DSLR (Sony)",
+      "Instant Reel Delivery",
+      "SD Card/Pendrive raw content delivery",
+      "Flareels logo Mandatory",
+    ],
+    badge: "Single Event",
+    isPopular: false,
+  },
+  {
+    name: "Pro",
+    subtitle: "Three Events",
+    price: "₹44,999",
+    period: "pkg",
+    description: "Enhanced Cinematic storytelling with added creative elegance.",
+    features: [
+      "Covers 3 Events",
+      "10 Edited Reels",
+      "Shot on DSLR (Sony)",
+      "Instant Reel Delivery",
+      "SD Card/Pendrive raw content delivery",
+      "Flareels logo Mandatory",
+    ],
+    badge: "Three Events",
+    isPopular: false,
+  },
+  {
+    name: "Premium",
+    subtitle: "Four Events",
+    price: "₹59,999",
+    period: "pkg",
+    description: "Enhanced Cinematic storytelling with added creative elegance.",
+    features: [
+      "Covers 4 Events",
+      "15 Edited Reels",
+      "Shot on DSLR (Sony)",
+      "Instant Reel Delivery",
+      "SD Card/Pendrive raw content delivery",
+      "Flareels logo Mandatory",
+    ],
+    badge: "Four Events",
     isPopular: true,
   },
   {
-    name: "Bespoke Scale",
-    price: "Custom",
-    period: "tailored",
-    description: "For corporate brands and enterprise media teams seeking complete production dominance.",
+    name: "Premium Pro",
+    subtitle: "Complete Wedding",
+    price: "₹2,99,999",
+    period: "full wedding",
+    description: "The complete wedding experience with exclusive Cinematic addons & Signature Elegance.",
     features: [
-      "Unlimited Reels & long-form cuts",
-      "Dedicated creative director & producer",
-      "Multiple weekly shoots on-demand",
-      "Hyper-priority SLA delivery",
-      "Custom brand style kits",
-      "Full digital rights & source file access",
+      "Covers complete wedding events",
+      "25 Edited Reels",
+      "Instant Reel Delivery",
+      "Shot on DSLR (Sony)",
+      "SD Card raw content delivery",
+      "No Watermark / Non-Mandatory",
     ],
-    badge: "Elite",
+    badge: "Complete Wedding",
     isPopular: false,
   },
 ];
 
 export default function PricingSection() {
-  return (
-    <section className="relative  w-full max-w-7xl mx-auto px-4 py-14 pb-20 sm:px-6 mt-8 sm:py-20 sm:pb-28 lg:py-24 lg:pb-32 z-10 selection:bg-amber-400/30">
-      
-      {/* Glow Effect */}
-      <div className="absolute bottom-12 right-1/4 hidden h-[250px] w-[500px] rounded-full bg-amber-400/8 blur-[100px] pointer-events-none sm:block" />
+  const [activeCategory, setActiveCategory] = useState<"reel" | "wedding">("reel");
 
-      <div className="text-center mb-10 sm:mb-16 lg:mb-20">
+  const renderCard = (plan: typeof reelPlans[number], idx: number) => {
+    return (
+      <motion.div
+        key={plan.name}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: idx * 0.1, type: "spring", stiffness: 70 }}
+        whileHover={{ y: -8 }}
+        className={`group relative flex flex-col justify-between border rounded-[28px] p-6 sm:p-8 transition-all duration-300 shadow-2xl ${
+          plan.isPopular
+            ? "border-amber-300/80 bg-gradient-to-b from-[#171105]/80 to-zinc-950/95 ring-1 ring-amber-300/35 z-20"
+            : "border-white/5 bg-zinc-950/30 backdrop-blur-xl z-10"
+        }`}
+      >
+        {plan.isPopular && (
+          <div className="absolute inset-0 bg-amber-400/8 blur-xl -z-10 rounded-[28px] pointer-events-none" />
+        )}
+
+        <div>
+          {/* Header */}
+          <div className="flex justify-between items-start gap-2 mb-6">
+            <div>
+              <span className="text-[9px] bg-white/5 border border-white/10 text-zinc-300 font-mono px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                {plan.badge}
+              </span>
+              <h3 className="text-lg sm:text-xl font-black uppercase text-white mt-3 tracking-wide">
+                {plan.name}
+              </h3>
+              <p className="text-zinc-500 font-mono text-[9px] uppercase tracking-widest mt-1">
+                {plan.subtitle}
+              </p>
+            </div>
+            {plan.isPopular && (
+              <span className="shrink-0 text-[8px] sm:text-[9px] bg-amber-300 border border-amber-200 text-black font-extrabold px-2.5 py-1 rounded-full uppercase tracking-widest animate-pulse">
+                🔥 POPULAR
+              </span>
+            )}
+          </div>
+
+          {/* Price */}
+          <div className="flex items-baseline gap-1.5 mb-5">
+            <span className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">{plan.price}</span>
+            <span className="text-zinc-500 text-xs sm:text-sm">/ {plan.period}</span>
+          </div>
+
+          <p className="text-zinc-400 text-xs leading-relaxed mb-6 border-b border-white/5 pb-5">
+            {plan.description}
+          </p>
+
+          {/* Features */}
+          <ul className="space-y-3 mb-8">
+            {plan.features.map((feature, fIdx) => (
+              <li key={fIdx} className="flex items-start gap-2.5 text-xs text-zinc-300">
+                <Check className="h-4 w-4 text-amber-300 shrink-0 mt-0.5" />
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col gap-2 mt-auto">
+          <Link href="/contact" className="block w-full">
+            <motion.button
+              whileTap={{ scale: 0.98 }}
+              className={`w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-widest shadow-md transition-all duration-300 cursor-pointer ${
+                plan.isPopular
+                  ? "bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] text-black shadow-amber-500/20 hover:from-[#b77912] hover:via-[#ffd36e] hover:to-[#fff6cf]"
+                  : "bg-white/5 hover:bg-white/10 text-white border border-white/10"
+              }`}
+            >
+              Book Now
+            </motion.button>
+          </Link>
+          <a
+            href={`https://wa.me/919866695553?text=Hi%20Flareels,%20I%20am%20interested%20in%20your%20${encodeURIComponent(plan.name)}%20(${encodeURIComponent(plan.subtitle)})%20pricing%20plan.`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1.5 py-2 text-[10px] font-mono uppercase tracking-widest text-emerald-400 hover:text-emerald-300 transition-colors duration-300"
+          >
+            <PhoneCall className="h-3 w-3" />
+            <span>Chat on WhatsApp</span>
+          </a>
+        </div>
+      </motion.div>
+    );
+  };
+
+  return (
+    <section className="relative w-full max-w-7xl mx-auto px-4 py-14 pb-20 sm:px-6 z-10 selection:bg-amber-400/30">
+      
+      {/* Background Glow */}
+      <div className="absolute bottom-12 right-1/4 hidden h-[250px] w-[500px] rounded-full bg-amber-400/5 blur-[100px] pointer-events-none sm:block" />
+
+      {/* Main Headers */}
+      <div className="text-center mb-10 sm:mb-16">
         <motion.span 
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="border border-amber-300/25 bg-amber-300/10 px-4 py-1.5 text-[10px] sm:text-xs uppercase tracking-[4px] text-amber-200 rounded-full font-semibold"
         >
-          INVESTMENT & TIER PLANS
+          INVESTMENT PLANS
         </motion.span>
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
@@ -84,83 +238,104 @@ export default function PricingSection() {
           transition={{ delay: 0.2 }}
           className="text-zinc-400 text-sm sm:text-base max-w-2xl mx-auto mt-4"
         >
-          Premium video content crafted, shot, and delivered in minutes. Transparent pricing for creators and brands.
+          Transparent pricing for creators and events. Lock in professional production services delivered within minutes.
         </motion.p>
-      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-8 relative items-stretch">
-        {plans.map((plan, idx) => (
-          <motion.div
-            key={plan.name}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.15, type: "spring", stiffness: 70 }}
-            whileHover={{ y: -10 }}
-            className={`group relative flex flex-col justify-between border rounded-2xl sm:rounded-[32px] p-5 sm:p-8 md:p-10 transition-all duration-300 shadow-2xl ${
-              plan.isPopular
-                ? "border-amber-300/80 bg-gradient-to-b from-[#171105]/80 to-zinc-950/95 ring-1 ring-amber-300/35 sm:scale-[1.02] lg:scale-[1.04] z-20"
-                : "border-white/5 bg-zinc-950/30 backdrop-blur-xl z-10"
-            }`}
-          >
-            {/* Glowing gold backlighting for popular plans */}
-            {plan.isPopular && (
-              <div className="absolute inset-0 bg-amber-400/8 blur-xl -z-10 rounded-[32px] pointer-events-none" />
-            )}
-
-            <div>
-              {/* Header section */}
-              <div className="flex justify-between items-start gap-3 mb-5 sm:mb-6">
-                <div>
-                  <span className="text-[10px] bg-white/5 border border-white/10 text-zinc-300 font-bold px-2.5 py-0.8 rounded-full uppercase tracking-wider">
-                    {plan.badge}
-                  </span>
-                  <h3 className="text-lg sm:text-xl font-extrabold uppercase text-white mt-3 tracking-wide">
-                    {plan.name}
-                  </h3>
-                </div>
-                {plan.isPopular && (
-                  <span className="shrink-0 text-[8px] sm:text-[9px] bg-amber-300 border border-amber-200 text-black font-extrabold px-2 sm:px-3 py-1 rounded-full uppercase tracking-widest animate-pulse">
-                    🔥 POPULAR
-                  </span>
-                )}
-              </div>
-
-              {/* Price section */}
-              <div className="flex items-baseline gap-1.5 mb-6">
-                <span className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">{plan.price}</span>
-                <span className="text-zinc-500 text-xs sm:text-sm font-semibold">/ {plan.period}</span>
-              </div>
-
-              <p className="text-zinc-400 text-xs leading-relaxed mb-8 border-b border-white/5 pb-6">
-                {plan.description}
-              </p>
-
-              {/* Features list */}
-              <ul className="space-y-4 mb-10">
-                {plan.features.map((feature, fIdx) => (
-                  <li key={fIdx} className="flex items-center gap-3 text-xs md:text-sm text-zinc-300">
-                    <span className="text-amber-300 font-extrabold">✓</span>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* CTA Button */}
-            <motion.button
-              whileTap={{ scale: 0.98 }}
-              className={`w-full py-3.5 sm:py-4 rounded-xl sm:rounded-2xl text-xs font-black uppercase tracking-widest shadow-lg transition-all duration-300 cursor-pointer ${
-                plan.isPopular
-                  ? "bg-gradient-to-r from-[#8a5a08] via-[#f6c65b] to-[#fff1b8] text-black shadow-amber-500/20 hover:from-[#b77912] hover:via-[#ffd36e] hover:to-[#fff6cf]"
-                  : "bg-white/5 hover:bg-white/10 text-white border border-white/10"
+        {/* Mobile Toggle Switcher Button (hidden on large displays) */}
+        <div className="mt-8 flex justify-center md:hidden">
+          <div className="relative flex p-1 rounded-full border border-amber-300/10 bg-black/60 backdrop-blur-md max-w-xs w-full">
+            {/* Slider back */}
+            <div
+              className="absolute inset-y-1 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-300 transition-all duration-300 ease-out"
+              style={{
+                width: "calc(50% - 6px)",
+                left: activeCategory === "reel" ? "6px" : "calc(50% - 0px)",
+                top: "6px",
+                bottom: "6px",
+              }}
+            />
+            <button
+              onClick={() => setActiveCategory("reel")}
+              className={`relative z-10 w-1/2 py-2 text-[10px] font-black uppercase tracking-wider rounded-full transition-colors duration-300 select-none cursor-pointer ${
+                activeCategory === "reel" ? "text-black" : "text-zinc-400 hover:text-white"
               }`}
             >
-              Get Started Now
-            </motion.button>
-          </motion.div>
-        ))}
+              Reel Plans
+            </button>
+            <button
+              onClick={() => setActiveCategory("wedding")}
+              className={`relative z-10 w-1/2 py-2 text-[10px] font-black uppercase tracking-wider rounded-full transition-colors duration-300 select-none cursor-pointer ${
+                activeCategory === "wedding" ? "text-black" : "text-zinc-400 hover:text-white"
+              }`}
+            >
+              Wedding Plans
+            </button>
+          </div>
+        </div>
       </div>
+
+      {/* MOBILE CONTENT RENDER (either Reel or Wedding depending on toggle state) */}
+      <div className="block md:hidden">
+        <AnimatePresence mode="wait">
+          {activeCategory === "reel" ? (
+            <motion.div
+              key="mobile-reel"
+              initial={{ opacity: 0, x: -15 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 15 }}
+              transition={{ duration: 0.25 }}
+              className="grid grid-cols-1 gap-6"
+            >
+              {reelPlans.map((plan, idx) => renderCard(plan, idx))}
+            </motion.div>
+          ) : (
+            <motion.div
+              key="mobile-wedding"
+              initial={{ opacity: 0, x: 15 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -15 }}
+              transition={{ duration: 0.25 }}
+              className="grid grid-cols-1 gap-6"
+            >
+              {weddingPlans.map((plan, idx) => renderCard(plan, idx))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* DESKTOP CONTENT RENDER (stacked vertically: Reel packages at the top, Wedding packages below) */}
+      <div className="hidden md:flex flex-col gap-16">
+        
+        {/* Section 1: Professional Reel Packages */}
+        <div>
+          <div className="border-b border-amber-300/10 pb-4 mb-8">
+            <h3 className="text-xl font-extrabold uppercase text-amber-200 flex items-center gap-2 tracking-widest">
+              <Sparkles className="h-4 w-4 text-amber-300 animate-pulse" />
+              Professional Reel Packages
+            </h3>
+            <p className="text-xs text-zinc-500 font-mono mt-1">HOURLY & HALF-DAY CREATOR OPTIONS</p>
+          </div>
+          <div className="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {reelPlans.map((plan, idx) => renderCard(plan, idx))}
+          </div>
+        </div>
+
+        {/* Section 2: Brand Elite Packages for Weddings */}
+        <div>
+          <div className="border-b border-amber-300/10 pb-4 mb-8">
+            <h3 className="text-xl font-extrabold uppercase text-amber-200 flex items-center gap-2 tracking-widest">
+              <Calendar className="h-4 w-4 text-amber-300 animate-pulse" />
+              Brand Elite Packages for Weddings
+            </h3>
+            <p className="text-xs text-zinc-500 font-mono mt-1">SINGLE & MULTI-EVENT CUSTOM COVERAGES</p>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {weddingPlans.map((plan, idx) => renderCard(plan, idx))}
+          </div>
+        </div>
+
+      </div>
+      
     </section>
   );
 }

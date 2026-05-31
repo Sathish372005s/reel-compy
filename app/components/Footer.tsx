@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   FaInstagram,
   FaFacebookF,
@@ -9,11 +10,11 @@ import {
 } from "react-icons/fa";
 
 const quickLinks = [
-  "Home",
-  "Services",
-  "Pricing",
-  "About",
-  "Contact",
+  { name: "Home", href: "/" },
+  { name: "Services", href: "/services" },
+  { name: "Pricing", href: "/pricing" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ];
 
 const services = [
@@ -43,7 +44,7 @@ export default function Footer() {
             />
 
             <p className="text-gray-400 text-sm leading-relaxed">
-              India's first quick content service.
+              India&apos;s first quick content service.
               Shoot on DSLR, edit on Mac,
               and deliver premium reels
               within minutes.
@@ -51,15 +52,17 @@ export default function Footer() {
 
             <div className="flex gap-4 mt-6">
               {[
-                FaInstagram,
-                FaFacebookF,
-                FaYoutube,
-                FaWhatsapp,
-              ].map((Icon, index) => (
+                { Icon: FaInstagram, href: "https://www.instagram.com/weareflareels?igsh=NHU5MGFyajg5NTl6&utm_source=qr" },
+                { Icon: FaFacebookF, href: "#" },
+                { Icon: FaYoutube, href: "#" },
+                { Icon: FaWhatsapp, href: "https://wa.me/919866695553" },
+              ].map(({ Icon, href }, index) => (
                 <a
                   key={index}
-                  href="#"
-                  className="w-10 h-10 rounded-full border border-yellow-500/30 flex items-center justify-center text-yellow-400 hover:bg-yellow-400 hover:text-black transition-all duration-300"
+                  href={href}
+                  target={href !== "#" ? "_blank" : undefined}
+                  rel={href !== "#" ? "noopener noreferrer" : undefined}
+                  className="w-10 h-10 rounded-full border border-yellow-500/30 flex items-center justify-center text-yellow-400 hover:bg-yellow-400 hover:text-black transition-all duration-300 cursor-pointer"
                 >
                   <Icon size={16} />
                 </a>
@@ -75,13 +78,13 @@ export default function Footer() {
 
             <ul className="space-y-3">
               {quickLinks.map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
-                    className="text-gray-400 hover:text-yellow-400 transition-colors duration-300"
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    className="text-gray-400 hover:text-yellow-400 transition-colors duration-300 cursor-pointer"
                   >
-                    {item}
-                  </a>
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -111,21 +114,34 @@ export default function Footer() {
               Contact
             </h3>
 
-            <div className="space-y-4 text-gray-400">
-              <p>
-                📍 Parvatham Estates,Secunderabad,50003,Telangana
+            <div className="space-y-4 text-gray-400 text-sm">
+              <p className="flex items-start gap-2">
+                <span className="shrink-0 text-yellow-400">📍</span>
+                <span>Parvatham Estates, Secunderabad, 500003, Telangana</span>
               </p>
 
-              <p>
-                📞 +91 98666 95553
+              <p className="flex items-center gap-2">
+                <span className="shrink-0 text-yellow-400">📞</span>
+                <a
+                  href="tel:+919866695553"
+                  className="hover:text-yellow-400 transition duration-300 cursor-pointer"
+                >
+                  +91 98666 95553
+                </a>
               </p>
 
-              <p>
-                ✉ Weareflareels@gmail.com
+              <p className="flex items-center gap-2">
+                <span className="shrink-0 text-yellow-400">✉</span>
+                <a
+                  href="mailto:weareflareels@gmail.com"
+                  className="hover:text-yellow-400 transition duration-300 cursor-pointer"
+                >
+                  weareflareels@gmail.com
+                </a>
               </p>
 
-              <p>
-                Available Monday to Saturday, 9am - 7pm
+              <p className="flex items-center gap-2 text-zinc-500 font-mono text-[11px] mt-2">
+                <span>🕒 Mon - Sat, 9am - 7pm</span>
               </p>
             </div>
           </div>

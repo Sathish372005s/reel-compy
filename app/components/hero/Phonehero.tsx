@@ -9,11 +9,10 @@ interface CameraMockupProps {
   style?: MotionStyle;
   screen: "home" | "splash" | "instagram";
   setScreen?: (screen: "home" | "splash" | "instagram") => void;
-  flashActive?: boolean;
 }
 
 const CameraMockup = forwardRef<HTMLDivElement, CameraMockupProps>(function CameraMockup(
-  { className, style, screen, setScreen, flashActive = false },
+  { className, style, screen, setScreen },
   ref
 ) {
 
@@ -34,9 +33,6 @@ const CameraMockup = forwardRef<HTMLDivElement, CameraMockupProps>(function Came
         style={{
           transformStyle: "preserve-3d",
         }}
-        // Click trigger for capture zoom flash response
-        animate={flashActive ? { scale: [1, 0.96, 1.04, 1] } : {}}
-        transition={{ duration: 0.5, ease: "easeOut" }}
       >
         {/* Cinematic Rim Lighting & Volumetric Studio Glow behind the camera */}
         <motion.div

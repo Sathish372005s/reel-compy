@@ -1,12 +1,13 @@
-import ThemedRoutePage from "../components/sections/ThemedRoutePage";
+import AboutSection from "../components/Aboutsection";
+import BookingCta from "../components/BookingCta";
 
 export default function AboutPage() {
   return (
-    <ThemedRoutePage
-      eyebrow="About"
-      title="A creator studio"
-      accent="built for speed"
-      description="Flashoot blends production craft, fast edit systems, and social-first delivery for creators and businesses that move quickly."
-    />
+    <>
+      <AboutSection />
+      <div className="pb-20 border-t border-white/5 bg-[#030303]/30">
+        <BookingCta />
+      </div>
+    </>
   );
 }
