@@ -12,84 +12,84 @@ const services = [
     description: "Beautiful cinematic love stories captured before your big day.",
     icon: Heart,
     badge: "Cinema",
-    video:""
+    // video:""
   },
   {
     title: "Post Wedding",
     description: "Create timeless memories after the wedding celebrations.",
     icon: Sparkles,
     badge: "Memories",
-    video:""
+    // video:""
   },
   {
     title: "Engagement",
     description: "Capture every smile and special moment of your engagement.",
     icon: Camera,
     badge: "Shoot",
-    video:""
+    // video:""
   },
   {
     title: "Haldi",
     description: "Vibrant and joyful Haldi ceremony coverage with cinematic storytelling.",
     icon: Star,
     badge: "Vibrant",
-    video:""
+    // video:""
   },
   {
     title: "Sangeet",
     description: "High-energy coverage of dance, music, and unforgettable moments.",
     icon: Film,
     badge: "Energy",
-    video:""
+    // video:""
   },
   {
     title: "Wedding",
     description: "Complete wedding photography and videography with cinematic edits.",
     icon: Heart,
     badge: "Elite",
-    video:""
+    // video:""
   },
   {
     title: "Reception",
     description: "Elegant reception coverage highlighting every memorable detail.",
     icon: Sparkles,
     badge: "Elegant",
-    video:""
+    // video:""
   },
   {
     title: "Birthday",
     description: "Capture celebrations, laughter, and memories that last forever.",
     icon: User,
     badge: "Events",
-    video:""
+    // video:""
   },
   {
     title: "Business",
     description: "Professional corporate photography and video production services.",
     icon: Briefcase,
     badge: "Corporate",
-    video:""
+    // video:""
   },
   {
     title: "Brand Events",
     description: "Showcase your brand through premium event coverage and content.",
     icon: Briefcase,
     badge: "Marketing",
-    video:""
+    // video:""
   },
   {
     title: "Content Creators",
     description: "High-quality reels, shorts, and creator-focused visual content.",
     icon: Film,
     badge: "Social",
-    video:""
+    // video:""
   },
   {
     title: "Others",
     description: "Customized photography and videography solutions for any occasion.",
     icon: Star,
     badge: "Custom",
-    video:""
+    // video:""
   },
 ];
 
@@ -158,14 +158,7 @@ export default function ServicesSection() {
                 "
               >
                 {/* Loop-playing Reel Video Background */}
-                <video
-                  src={service.video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700 z-0"
-                />
+                {/*  */}
 
                 {/* Dark Vignette Overlay for Text Readability */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-black/10 z-0" />

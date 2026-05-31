@@ -109,10 +109,10 @@ export default function AboutSection() {
 
               <div className="rounded-2xl border border-yellow-500/20 bg-black/40 p-6 text-center">
                 <h3 className="text-4xl font-black text-yellow-400">
-                  48H
+                  Fast
                 </h3>
                 <p className="mt-2 text-gray-400">
-                  Fast Delivery
+                  Delivery
                 </p>
               </div>
 
@@ -133,20 +133,20 @@ export default function AboutSection() {
             <div className="absolute h-[350px] w-[350px] rounded-full bg-yellow-500/20 blur-[100px]" />
 
             {/* Main Card */}
-            <div className="relative overflow-hidden rounded-3xl ">
+            <div className="relative bottom-3.5 overflow-hidden rounded-3xl ">
               <img
-                src="/profile.png"
+                src="/ggggg.jpeg"
                 alt="Flareels Team"
-                className="h-fit w-[95%] object-cover"
+                className="h-full w-full object-cover"
               />
 
               {/* Floating Badge */}
-              <div className="absolute  bottom-6 left-6 rounded-2xl border border-yellow-500/30 bg-black/80 px-5 py-4 backdrop-blur-md">
-                <p className="text-yellow-400 font-bold">
-                  ★ Trusted By
+              <div className="absolute bottom-3 left-3 max-w-[78%] rounded-xl border border-yellow-500/30 bg-black/80 px-3 py-2 backdrop-blur-md sm:bottom-6 sm:left-6 sm:rounded-2xl sm:px-5 sm:py-4">
+                <p className="text-xs font-bold text-yellow-400 sm:text-base">
+                  Ganesh Antooju
                 </p>
-                <p className="text-white">
-                  100+ Happy Clients
+                <p className="text-[10px] leading-snug text-white sm:text-base sm:leading-normal">
+                  Founder ,Ceo and Managing Director
                 </p>
               </div>
             </div>
