@@ -1,4 +1,3 @@
-/// <reference path="../../types/aos.d.ts" />
 "use client";
 
 import { useEffect } from "react";
