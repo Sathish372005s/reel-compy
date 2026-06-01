@@ -33,13 +33,13 @@ export default function HomePage() {
             : "opacity-100 max-h-[6000px] pointer-events-auto filter blur-none -mt-36 sm:opacity-0 sm:max-h-0 sm:overflow-hidden sm:pointer-events-none sm:filter sm:blur-md sm:mt-0"
           }`}
       >
-        <div className="w-full">
-          <Pic />
-        </div>
+        
         <div className="w-full">
           <WorkFlowSection />
         </div>
-
+          <div className="w-full">
+          <Pic />
+        </div>
         <div className="w-full">
           <PricingSection />
         </div>

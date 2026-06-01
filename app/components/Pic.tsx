@@ -2,7 +2,7 @@ import React from 'react'
 
 function Pic() {
   return (
-    <div className="mx-auto max-w-7xl px-6 lg:px-12">
+    <div className="mx-auto max-w-7xl px-6 mb-3 lg:px-12">
   <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
 
     {/* Left Side */}
