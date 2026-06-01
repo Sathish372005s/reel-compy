@@ -36,7 +36,7 @@ function Pic() {
 
         <div className="absolute bottom-3 left-3 max-w-[78%] rounded-xl border border-yellow-500/30 bg-black/80 px-3 py-2 backdrop-blur-md sm:bottom-6 sm:left-6 sm:rounded-2xl sm:px-5 sm:py-4">
           <p className="text-xs font-bold text-yellow-400 sm:text-base">
-            Sindhu Yadhav
+            Sindu Antooju
           </p>
           <p className="text-[10px] leading-snug text-white sm:text-base sm:leading-normal">
             Director of Operations
