@@ -37,11 +37,13 @@ export default function HomePage() {
         <div className="w-full">
           <WorkFlowSection />
         </div>
-          <div className="w-full">
-          <Pic />
-        </div>
+          <br/>
         <div className="w-full">
           <PricingSection />
+        </div>
+
+        <div className="w-full">
+          <Pic />
         </div>
 
         <div className="w-full">
