@@ -6,6 +6,7 @@ import WorkFlowSection from "./components/sections/WorkFlowSection";
 import PricingSection from "./components/sections/PricingSection";
 import BookingCta from "./components/BookingCta";
 import Footer from "./components/Footer";
+import Pic from "./components/Pic";
 
 export default function HomePage() {
   const [screen, setScreen] = useState<"home" | "splash" | "instagram">("home");
@@ -17,7 +18,7 @@ export default function HomePage() {
         Hero Section containing the scrollable phone mockup.
         Updates screen state to trigger unlocking elements below.
       */}
-      <div className="relative z-10 mt-5 w-full">
+      <div className="relative z-10 mt-7 w-full">
         <HeroSection screen={screen} setScreen={setScreen} />
       </div>
 
@@ -32,6 +33,9 @@ export default function HomePage() {
             : "opacity-100 max-h-[6000px] pointer-events-auto filter blur-none -mt-36 sm:opacity-0 sm:max-h-0 sm:overflow-hidden sm:pointer-events-none sm:filter sm:blur-md sm:mt-0"
           }`}
       >
+        <div className="w-full">
+          <Pic />
+        </div>
         <div className="w-full">
           <WorkFlowSection />
         </div>

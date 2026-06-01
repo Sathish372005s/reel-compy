@@ -3,6 +3,7 @@
 
 import { Camera, Video, Award, Sparkles } from "lucide-react";
 import Link from "next/link";
+import Pic from "./Pic";
 
 export default function AboutSection() {
   return (
@@ -135,23 +136,20 @@ export default function AboutSection() {
             {/* Main Card */}
             <div className="relative bottom-3.5 overflow-hidden rounded-3xl ">
               <img
-                src="/ggggg.jpeg"
+                src="/logo.png"
                 alt="Flareels Team"
                 className="h-full w-full object-cover"
               />
 
               {/* Floating Badge */}
-              <div className="absolute bottom-3 left-3 max-w-[78%] rounded-xl border border-yellow-500/30 bg-black/80 px-3 py-2 backdrop-blur-md sm:bottom-6 sm:left-6 sm:rounded-2xl sm:px-5 sm:py-4">
-                <p className="text-xs font-bold text-yellow-400 sm:text-base">
-                  Ganesh Antooju
-                </p>
-                <p className="text-[10px] leading-snug text-white sm:text-base sm:leading-normal">
-                  Founder ,Ceo and Managing Director
-                </p>
-              </div>
+              
             </div>
+            
           </div>
+          
         </div>
+        <br />
+        <Pic />
 
         {/* CTA */}
         <div className="mt-20 text-center">
