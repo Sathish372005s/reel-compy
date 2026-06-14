@@ -54,7 +54,7 @@ export default function Footer() {
               {[
                 { Icon: FaInstagram, href: "https://www.instagram.com/weareflareels?igsh=NHU5MGFyajg5NTl6&utm_source=qr" },
                 { Icon: FaFacebookF, href: "https://www.facebook.com/share/1D8755KexM/?mibextid=wwXIfr" },
-                { Icon: FaYoutube, href: "#" },
+                { Icon: FaYoutube, href: "https://youtube.com/@flareels.12?si=yLd5cQQJVFQGF5xR" },
                 { Icon: FaWhatsapp, href: "https://wa.me/919866695553" },
               ].map(({ Icon, href }, index) => (
                 <a
@@ -165,7 +165,7 @@ export default function Footer() {
             </a>
 
             <a
-              href="#"
+              href="/terms"
               className="text-gray-500 hover:text-yellow-400 transition"
             >
               Terms & Conditions

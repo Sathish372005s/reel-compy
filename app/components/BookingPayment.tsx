@@ -14,7 +14,7 @@ interface BookingPaymentProps {
 
 export default function BookingPayment({
   packageName = "Smart Shot",
-  totalPrice = 1499,
+  totalPrice = 4999,
   isModal = false,
   onClose,
 }: BookingPaymentProps) {
@@ -37,10 +37,8 @@ export default function BookingPayment({
 
   const termsList = [
     "50% advance payment required to confirm booking",
-    "Travel expenses are to be borne by the client",
     "Cancellations must be informed 24 hours in advance",
     "Last-minute cancellations are non-refundable",
-    "RAW footage will not be shared under any package",
     "Logo placement is mandatory on all delivered reels"
   ];
 
@@ -169,7 +167,10 @@ export default function BookingPayment({
               </div>
             </div>
             <span className="text-xs font-semibold text-zinc-300 transition-colors duration-200 group-hover:text-white">
-              I agree to the <span className="text-red-500 group-hover:underline">terms and conditions</span>
+              I agree to the{' '}
+              <a href="/terms" className="text-red-500 group-hover:underline">
+                terms and conditions
+              </a>
             </span>
           </label>
         </div>

@@ -73,10 +73,8 @@ export default function ContactForm() {
 
   const termsList = [
     "50% advance payment required to confirm booking",
-    "Travel expenses are to be borne by the client",
     "Cancellations must be informed 24 hours in advance",
     "Last-minute cancellations are non-refundable",
-    "RAW footage will not be shared under any package",
     "Logo placement is mandatory on all delivered reels"
   ];
 

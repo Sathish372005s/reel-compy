@@ -9,7 +9,7 @@ import BookingPayment from "../components/BookingPayment";
 function ContactContent() {
   const searchParams = useSearchParams();
   const packageName = searchParams.get("package") || "Smart Shot";
-  const price = searchParams.get("price") || "1499";
+  const price = searchParams.get("price") || "4999";
 
   return (
     <>

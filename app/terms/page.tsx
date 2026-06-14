@@ -2,9 +2,9 @@ import React from "react";
 
 export default function TermsPage() {
   return (
-    <main className="prose prose-invert h-full max-w-4xl mx-auto px-6 md:py-33 text-zinc-200">
+    <main className="prose prose-invert h-full max-w-4xl mx-auto px-6 pt-24 pb-16 text-zinc-200">
       <h1>FLAREELS – Terms &amp; Conditions</h1>
-      <ol className="gap-y-1.5">
+      <ul className="list-disc space-y-3 pl-6">
         <li>
           A minimum 50% advance payment is required to confirm any booking. The remaining balance must be paid before the final delivery of photos, videos, reels, or other agreed content.
         </li>
@@ -41,7 +41,7 @@ export default function TermsPage() {
         <li>
           By confirming a booking and making the advance payment, the client acknowledges that they have read, understood, and agreed to these Terms & Conditions.
         </li>
-      </ol>
+      </ul>
     </main>
   );
 }
