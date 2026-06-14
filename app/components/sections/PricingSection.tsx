@@ -214,7 +214,7 @@ export default function PricingSection() {
 
         {/* Action Buttons */}
         <div className="flex flex-col gap-2 mt-auto">
-          <Link href="/contact" className="block w-full">
+          <Link href={`/contact?package=${encodeURIComponent(plan.name)}&price=${encodeURIComponent(plan.price)}`} className="block w-full">
             <motion.button
               whileTap={{ scale: 0.98 }}
               className={`w-full py-3.5 rounded-xl text-xs font-black uppercase tracking-widest shadow-md transition-all duration-300 cursor-pointer ${

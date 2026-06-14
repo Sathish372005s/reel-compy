@@ -10,6 +10,7 @@ type ContactPayload = {
   serviceType?: unknown;
   plan?: unknown;
   message?: unknown;
+  agreedToTerms?: unknown;
 };
 
 const sanitize = (value: unknown) =>
@@ -35,6 +36,7 @@ export async function POST(req: Request) {
     const serviceType = sanitize(payload.serviceType);
     const plan = sanitize(payload.plan);
     const message = sanitize(payload.message);
+    const agreedToTerms = payload.agreedToTerms === true || payload.agreedToTerms === "true";
 
     if (!name || !email || !phone || !serviceType || !plan || !message) {
       return NextResponse.json(
@@ -249,6 +251,10 @@ export async function POST(req: Request) {
                 <td class="label">Selected Plan</td>
                 <td class="value">${safePlan}</td>
               </tr>
+              <tr>
+                <td class="label">Terms Accepted</td>
+                <td class="value">${agreedToTerms ? "<strong>Yes</strong>" : "No"}</td>
+              </tr>
             </table>
 
             <div class="message-title">Project Details</div>
@@ -298,6 +304,7 @@ export async function POST(req: Request) {
         `Phone: ${phone}`,
         `Service Type: ${serviceType}`,
         `Plan: ${plan}`,
+        `Terms Accepted: ${agreedToTerms ? "Yes" : "No"}`,
         "",
         message,
       ].join("\n"),
@@ -306,6 +313,25 @@ export async function POST(req: Request) {
         name,
         address: email,
       },
+      attachments: [
+        {
+          filename: "Terms_And_Conditions.txt",
+          content: [
+            "Flareels Terms & Conditions",
+            "===========================",
+            "",
+            "1. 50% advance payment required to confirm booking.",
+            "2. Travel expenses are to be borne by the client.",
+            "3. Cancellations must be informed 24 hours in advance.",
+            "4. Last-minute cancellations are non-refundable.",
+            "5. RAW footage will not be shared under any package.",
+            "6. Logo placement is mandatory on all delivered reels.",
+            "",
+            `Accepted by Client: ${name} (${email})`,
+            `Agreement Status: ${agreedToTerms ? "Agreed and Accepted" : "Not Accepted"}`
+          ].join("\n")
+        }
+      ]
     });
 
     return NextResponse.json({

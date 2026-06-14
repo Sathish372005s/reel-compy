@@ -7,6 +7,7 @@ import PricingSection from "./components/sections/PricingSection";
 import BookingCta from "./components/BookingCta";
 import Footer from "./components/Footer";
 import Pic from "./components/Pic";
+import BookingPayment from "./components/BookingPayment";
 
 export default function HomePage() {
   const [screen, setScreen] = useState<"home" | "splash" | "instagram">("home");
@@ -47,6 +48,10 @@ export default function HomePage() {
         </div>
 
         <div className="w-full">
+          <BookingPayment />
+        </div>
+
+        <div className="w-full">
           <BookingCta />
         </div>
 
@@ -55,3 +60,4 @@ export default function HomePage() {
     </main>
   );
 }
+

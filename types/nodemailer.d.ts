@@ -17,6 +17,12 @@ declare module "nodemailer" {
     auth: AuthOptions;
   };
 
+  type Attachment = {
+    filename: string;
+    content: string | Buffer;
+    contentType?: string;
+  };
+
   type SendMailOptions = {
     from: string;
     to: string;
@@ -24,6 +30,7 @@ declare module "nodemailer" {
     text?: string;
     html?: string;
     replyTo?: string | Address;
+    attachments?: Attachment[];
   };
 
   type Transporter = {

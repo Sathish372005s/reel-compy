@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Calendar, ArrowUpRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Calendar, ArrowUpRight, Check, ChevronDown, ChevronUp, FileText } from "lucide-react";
 
 const servicePlans = {
   reel: {
@@ -36,6 +36,49 @@ export default function ContactForm() {
     plan: "",
     message: "",
   });
+
+  // Pre-populate serviceType and plan from URL parameters
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const pkgParam = params.get("package");
+      if (pkgParam) {
+        let foundServiceType = "";
+        let foundPlanValue = "";
+
+        for (const [sType, service] of Object.entries(servicePlans)) {
+          const matchedPlan = service.plans.find(
+            (p) => p.name.toLowerCase() === pkgParam.toLowerCase()
+          );
+          if (matchedPlan) {
+            foundServiceType = sType;
+            foundPlanValue = `${matchedPlan.name} - ${matchedPlan.price}`;
+            break;
+          }
+        }
+
+        if (foundServiceType) {
+          setFormData((prev) => ({
+            ...prev,
+            serviceType: foundServiceType,
+            plan: foundPlanValue,
+          }));
+        }
+      }
+    }
+  }, []);
+
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const [showTermsDropdown, setShowTermsDropdown] = useState(false);
+
+  const termsList = [
+    "50% advance payment required to confirm booking",
+    "Travel expenses are to be borne by the client",
+    "Cancellations must be informed 24 hours in advance",
+    "Last-minute cancellations are non-refundable",
+    "RAW footage will not be shared under any package",
+    "Logo placement is mandatory on all delivered reels"
+  ];
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
@@ -82,6 +125,7 @@ export default function ContactForm() {
             ]?.label || formData.serviceType,
           plan: formData.plan,
           message: formData.message,
+          agreedToTerms: agreedToTerms,
         }),
       });
 
@@ -105,6 +149,7 @@ export default function ContactForm() {
         plan: "",
         message: "",
       });
+      setAgreedToTerms(false);
     } catch (err: unknown) {
       setError(
         err instanceof Error ? err.message : "Something went wrong."
@@ -364,7 +409,7 @@ export default function ContactForm() {
                 "
               >
                 <option value="" className="bg-black">
-                  Select plan
+                  {!formData.serviceType ? "Select service type first" : "Select plan"}
                 </option>
                 {formData.serviceType &&
                   servicePlans[
@@ -409,6 +454,66 @@ export default function ContactForm() {
             />
           </div>
 
+          {/* Terms checkbox */}
+          <div className="mt-5 border-t border-yellow-500/10 pt-5">
+            <div className="flex items-start gap-3 select-none">
+              <label className="relative flex items-center justify-center cursor-pointer mt-0.5">
+                <input
+                  type="checkbox"
+                  checked={agreedToTerms}
+                  onChange={(e) => setAgreedToTerms(e.target.checked)}
+                  className="peer sr-only"
+                />
+                <div className="h-5 w-5 rounded-md border border-yellow-500/30 bg-black/60 transition-all duration-200 peer-checked:border-yellow-400 peer-checked:bg-yellow-400 flex items-center justify-center">
+                  <Check className="h-3 w-3 text-black opacity-0 transition-opacity duration-200 peer-checked:opacity-100 font-bold" />
+                </div>
+              </label>
+              <div className="text-xs">
+                <span className="text-zinc-300">I agree to the </span>
+                <button
+                  type="button"
+                  onClick={() => setShowTermsDropdown(!showTermsDropdown)}
+                  className="text-yellow-400 hover:text-yellow-300 font-semibold underline inline-flex items-center gap-1.5 focus:outline-none cursor-pointer"
+                >
+                  terms and conditions
+                  {showTermsDropdown ? (
+                    <ChevronUp className="h-3.5 w-3.5" />
+                  ) : (
+                    <ChevronDown className="h-3.5 w-3.5" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Collapsible Terms Dropdown */}
+            <AnimatePresence>
+              {showTermsDropdown && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="mt-4 rounded-xl border border-yellow-500/10 bg-zinc-950/60 p-4 text-left">
+                    <h5 className="text-[11px] font-black uppercase text-yellow-400 tracking-wider mb-2.5 inline-flex items-center gap-1.5">
+                      <FileText className="h-3.5 w-3.5" />
+                      Booking Terms & Conditions
+                    </h5>
+                    <ul className="space-y-2">
+                      {termsList.map((term, index) => (
+                        <li key={index} className="flex items-start gap-2 text-[11px] text-zinc-450">
+                          <div className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-yellow-500/60" />
+                          <span>{term}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           {/* Success Message */}
           {success && (
             <div className="mt-6 rounded-xl border border-green-500/30 bg-green-500/10 p-4 text-center text-green-400">
@@ -426,25 +531,21 @@ export default function ContactForm() {
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={loading}
-            className="
+            disabled={loading || !agreedToTerms}
+            className={`
               mt-6 md:mt-8
               w-full
               rounded-full
-              bg-gradient-to-r
-              from-yellow-500
-              to-yellow-300
               py-3 md:py-4
               text-sm md:text-base
               font-bold
-              text-black
               transition-all
               duration-300
-              hover:scale-[1.02]
-              disabled:cursor-not-allowed
-              disabled:opacity-70
-              cursor-pointer
-            "
+              ${agreedToTerms && !loading
+                ? "bg-gradient-to-r from-yellow-500 to-yellow-300 text-black hover:scale-[1.02] cursor-pointer"
+                : "bg-zinc-800 text-zinc-500 border border-zinc-700/50 cursor-not-allowed"
+              }
+            `}
           >
             {loading ? (
               <div className="flex items-center justify-center gap-3">
