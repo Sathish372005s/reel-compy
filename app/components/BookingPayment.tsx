@@ -2,8 +2,56 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FileText, Receipt, ShieldCheck, Lock, Sparkles, Check, X, PhoneCall } from "lucide-react";
+import { FileText, Receipt, ShieldCheck, Lock, Sparkles, Check, X, PhoneCall, ChevronDown } from "lucide-react";
 // Razorpay integration will open checkout instead of showing QR
+
+// All pricing plans
+const allPlans = [
+  // Reel Plans
+  {
+    name: "Creator Launch",
+    subtitle: "Hourly Plan",
+    price: 4999,
+    period: "shoot",
+    description: "2-hour professional DSLR creator package to launch your social feed.",
+  },
+  {
+    name: "Creator Pro",
+    subtitle: "Half-Day Plan",
+    price: 7999,
+    period: "shoot",
+    description: "4-hour professional DSLR shoot, content planning, and rapid editing.",
+  },
+  // Wedding Plans
+  {
+    name: "Basic",
+    subtitle: "Single Event",
+    price: 14999,
+    period: "event",
+    description: "Clean DSLR memories crafted beautifully within your budget.",
+  },
+  {
+    name: "Pro",
+    subtitle: "Three Events",
+    price: 44999,
+    period: "pkg",
+    description: "Enhanced Cinematic storytelling with added creative elegance.",
+  },
+  {
+    name: "Premium",
+    subtitle: "Four Events",
+    price: 59999,
+    period: "pkg",
+    description: "Enhanced Cinematic storytelling with added creative elegance.",
+  },
+  {
+    name: "Premium Pro",
+    subtitle: "Complete Wedding",
+    price: 99999,
+    period: "full wedding",
+    description: "The complete wedding experience with exclusive Cinematic addons & Signature Elegance.",
+  },
+];
 
 interface BookingPaymentProps {
   packageName?: string;
@@ -13,27 +61,27 @@ interface BookingPaymentProps {
 }
 
 export default function BookingPayment({
-  packageName = "Smart Shot",
+  packageName = "Creator Launch",
   totalPrice = 4999,
   isModal = false,
   onClose,
 }: BookingPaymentProps) {
   const [agreed, setAgreed] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(
+    allPlans.find(p => p.name === packageName) || allPlans[0]
+  );
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   
 
-  // Parse numeric price
-  const numericPrice = typeof totalPrice === "number" 
-    ? totalPrice 
-    : parseInt(totalPrice.replace(/[^0-9]/g, ""), 10);
-  
-  const isCustom = isNaN(numericPrice) || numericPrice <= 0;
-  const advance = isCustom ? 0 : Math.floor(numericPrice / 2);
-  const remaining = isCustom ? 0 : numericPrice - advance;
+  // Get numeric price from selected plan
+  const numericPrice = selectedPlan.price;
+  const advance = Math.floor(numericPrice / 2);
+  const remaining = numericPrice - advance;
 
   // Reset agreement when package changes
   useEffect(() => {
     setAgreed(false);
-  }, [packageName, totalPrice]);
+  }, [selectedPlan]);
 
   const termsList = [
     "50% advance payment required to confirm booking",
@@ -43,15 +91,6 @@ export default function BookingPayment({
   ];
 
   const handleActionClick = async () => {
-    if (isCustom) {
-      window.open(
-        `https://wa.me/919866695553?text=Hi%20Flareels,%20I%20am%2520interested%20in%20your%20${encodeURIComponent(packageName)}%20package.`,
-        "_blank",
-        "noopener,noreferrer"
-      );
-      return;
-    }
-
     // Create order on server and open Razorpay checkout
     try {
       const res = await fetch("/api/razorpay/create-order", {
@@ -78,7 +117,7 @@ export default function BookingPayment({
         amount: data.amount,
         currency: data.currency || "INR",
         name: "Flareels",
-        description: packageName,
+        description: selectedPlan.name,
         order_id: data.id,
         method: {
           upi: true,
@@ -191,34 +230,93 @@ export default function BookingPayment({
             </div>
           </div>
 
+          {/* Plan Selector Dropdown */}
+          <div className="mb-6">
+            <label className="block text-xs font-semibold text-zinc-300 mb-2 uppercase tracking-wider">
+              Select Plan
+            </label>
+            <div className="relative">
+              <button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="w-full flex items-center justify-between rounded-lg border border-yellow-500/30 bg-black/40 px-4 py-3 text-sm text-white transition-all duration-200 hover:border-yellow-500/50 hover:bg-black/60"
+              >
+                <div className="text-left">
+                  <div className="font-bold text-white">{selectedPlan.name}</div>
+                  <div className="text-[10px] text-zinc-500 mt-0.5">{selectedPlan.subtitle}</div>
+                </div>
+                <ChevronDown 
+                  className={`h-4 w-4 text-zinc-400 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+
+              {/* Dropdown Menu */}
+              <AnimatePresence>
+                {isDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute top-full left-0 right-0 mt-2 rounded-lg border border-yellow-500/20 bg-zinc-900 shadow-2xl z-50 overflow-hidden"
+                  >
+                    <div className="max-h-64 overflow-y-auto">
+                      {allPlans.map((plan) => (
+                        <button
+                          key={plan.name}
+                          onClick={() => {
+                            setSelectedPlan(plan);
+                            setIsDropdownOpen(false);
+                          }}
+                          className={`w-full px-4 py-3 text-left text-sm transition-all duration-150 border-b border-white/5 hover:bg-yellow-500/10 ${
+                            selectedPlan.name === plan.name
+                              ? 'bg-yellow-500/20 border-l-2 border-l-yellow-400'
+                              : ''
+                          }`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <div className="font-semibold text-white">{plan.name}</div>
+                              <div className="text-[11px] text-zinc-500 mt-0.5">{plan.subtitle}</div>
+                            </div>
+                            <div className="text-right">
+                              <div className="font-bold text-yellow-400">₹{plan.price.toLocaleString("en-IN")}</div>
+                              <div className="text-[10px] text-zinc-500">{plan.period}</div>
+                            </div>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+
           {/* Pricing details table */}
           <div className="space-y-4 mb-6">
             <div className="flex justify-between items-center text-xs">
-              <span className="text-zinc-400">Package ({packageName}):</span>
+              <span className="text-zinc-400">Package ({selectedPlan.name}):</span>
               <span className="font-mono text-white font-bold">
-                {isCustom ? totalPrice : `₹${numericPrice.toLocaleString("en-IN")}`}
+                ₹{numericPrice.toLocaleString("en-IN")}
               </span>
             </div>
             <div className="h-[1px] bg-white/5 w-full" />
             <div className="flex justify-between items-center text-xs">
               <span className="text-zinc-300 font-semibold">Total Amount:</span>
               <span className="font-mono text-white font-black text-sm">
-                {isCustom ? totalPrice : `₹${numericPrice.toLocaleString("en-IN")}`}
+                ₹{numericPrice.toLocaleString("en-IN")}
               </span>
             </div>
             <div className="flex justify-between items-center text-xs text-red-500 font-bold">
               <span>Pay Now (50% Advance):</span>
               <span className="font-mono text-lg">
-                {isCustom ? "TBD" : `₹${advance.toLocaleString("en-IN")}`}
+                ₹{advance.toLocaleString("en-IN")}
               </span>
             </div>
           </div>
 
           <p className="text-[11px] text-zinc-500 italic mb-8 font-mono">
-            {isCustom 
-              ? "* Advance token amount discussed on contact" 
-              : `* Remaining ₹${remaining.toLocaleString("en-IN")} to be paid on event day`
-            }
+            * Remaining ₹{remaining.toLocaleString("en-IN")} to be paid on event day
           </p>
         </div>
 
@@ -235,17 +333,10 @@ export default function BookingPayment({
                 : "bg-zinc-800 text-zinc-500 cursor-not-allowed border border-zinc-700/50"
             }`}
           >
-            {isCustom ? (
-              <>
-                <PhoneCall className="h-4 w-4" />
-                <span>Enquire on WhatsApp</span>
-              </>
-            ) : (
-              <>
-                <Lock className="h-4 w-4" />
-                <span>Pay ₹{advance.toLocaleString("en-IN")} & Confirm Booking</span>
-              </>
-            )}
+            <>
+              <Lock className="h-4 w-4" />
+              <span>Pay ₹{advance.toLocaleString("en-IN")} & Confirm Booking</span>
+            </>
           </motion.button>
 
           {/* Security Note */}
