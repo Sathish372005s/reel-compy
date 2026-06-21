@@ -146,8 +146,10 @@ const getWhatsAppText = (plan: typeof reelPlans[number]) => {
     `Hi team, I’m looking at the ${plan.name} (${plan.subtitle}) plan. Could you send me the exact pricing and features?`,
   ];
 
-  const randomIntro = templates[Math.floor(Math.random() * templates.length)];
-  return encodeURIComponent(`${randomIntro} Features: ${plan.features.join(", ")}`);
+  const hash = Array.from(plan.name).reduce((sum, char) => sum + char.charCodeAt(0), 0);
+  const templateIndex = hash % templates.length;
+  const intro = templates[templateIndex];
+  return encodeURIComponent(`${intro} Features: ${plan.features.join(", ")}`);
 };
 
 export default function PricingSection() {
