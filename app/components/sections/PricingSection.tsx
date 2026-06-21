@@ -139,6 +139,17 @@ const businessPlans = [
   },
 ];
 
+const getWhatsAppText = (plan: typeof reelPlans[number]) => {
+  const templates = [
+    `Hi Flareels, I’m interested in the ${plan.name} (${plan.subtitle}) plan. Please share the full details.`,
+    `Hello! I’d like to know more about the ${plan.name} (${plan.subtitle}) package. ${plan.description}`,
+    `Hi team, I’m looking at the ${plan.name} (${plan.subtitle}) plan. Could you send me the exact pricing and features?`,
+  ];
+
+  const randomIntro = templates[Math.floor(Math.random() * templates.length)];
+  return encodeURIComponent(`${randomIntro} Features: ${plan.features.join(", ")}`);
+};
+
 export default function PricingSection() {
   const [activeCategory, setActiveCategory] = useState<"reel" | "wedding">("reel");
 
@@ -227,7 +238,7 @@ export default function PricingSection() {
             </motion.button>
           </Link>
           <a
-            href={`https://wa.me/919866695553?text=Hi%20Flareels,%20I%20am%20interested%20in%20your%20${encodeURIComponent(plan.name)}%20(${encodeURIComponent(plan.subtitle)})%20pricing%20plan.`}
+            href={`https://wa.me/919866695553?text=${getWhatsAppText(plan)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-1.5 py-2 text-[10px] font-mono uppercase tracking-widest text-emerald-400 hover:text-emerald-300 transition-colors duration-300"
@@ -369,7 +380,6 @@ export default function PricingSection() {
         </div>
 
       </div>
-      
     </section>
   );
 }
